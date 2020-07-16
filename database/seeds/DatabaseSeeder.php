@@ -15,6 +15,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call('RoleTableSeeder');
+        $this->call('CatogorySeeder');    
+        $this->call('ColorSeeder');    
+
+
+
         factory(App\Models\Account::class, 10)->create();
 
 

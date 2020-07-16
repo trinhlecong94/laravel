@@ -14,18 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return redirect('/login');
-});
 
-Route::get('home', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
+
+
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function () { 
+
+Route::group(['middleware' => ['auth']], function () {
     Route::get('account/{id}', 'AccountController@find');
+
+    Route::get('admin/{id}', 'AdminController@find');
+
+    Route::get('seller/{id}', 'SellerController@find');
 });
-
-
-
 

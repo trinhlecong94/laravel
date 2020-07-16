@@ -24,8 +24,7 @@ class SellerController extends Controller
     public function index(Request $request)
     {
       
-        $request->user()->authorizeRoles(['employee', 'admin']);
-        
+        $request->user()->authorizeRoles(['seller']);
         return view('home');
     }
 }

@@ -24,7 +24,7 @@ class AdminCotroller extends Controller
     public function index(Request $request)
     {
       
-        $request->user()->authorizeRoles(['employee', 'admin']);
+        $request->user()->authorizeRoles(['admin']);
         
         return view('home');
     }

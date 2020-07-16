@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Services\ProductService;
+use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
 {
+
+    private $productService;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ProductService $productService)
     {
-        $this->middleware('auth');
+        $this->productService = $productService;
     }
 
     /**
@@ -23,7 +28,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['employee', 'admin']);
-        return view('home');
+        $data = $this->productService->pagination();
+
+        // echo '<pre>' . var_export($data, true) . '</pre>';
+        // die();
+        return view('pages.home', compact('data'));
     }
 }
