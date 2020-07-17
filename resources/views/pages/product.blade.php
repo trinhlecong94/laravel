@@ -1,4 +1,4 @@
-@extends('layouts.app1')
+@extends('layouts.app')
 @section('content')
 <div class="super_container_inner">
     <div class="super_overlay"></div>
@@ -50,7 +50,7 @@
                             {{$product->name}}
                         </div>
                         <div class="product_category">In
-                            <a href="/category?id={{$product->categories->id}}">
+                            <a href="/category/{{$product->categories->id}}">
                                 {{$product->categories->name}}
                             </a>
                         </div>
@@ -149,23 +149,20 @@
             @else
             <h2 class="comment-header">0 Comments</h2>
             @endif
-
-            <!-- 
-                TO-DO
-                <sec:authorize access="isAuthenticated()">
-                <form action="${pageContext.request.getContextPath()}/comment" method="post" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="comment">Comment:</label>
-                        <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+            @auth
+            <form action="${pageContext.request.getContextPath()}/comment" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+                </div>
+                <div class="form-group">
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-primary">Add Comment</button>
                     </div>
-                    <div class="form-group">
-                        <div style="text-align: center">
-                            <button type="submit" class="btn btn-primary">Add Comment</button>
-                        </div>
-                    </div>
-                    <input type="hidden" name="productId" value="${product.id}" />
-                </form>
-            </sec:authorize> -->
+                </div>
+                <input type="hidden" name="productId" value="${product.id}" />
+            </form>
+            @endauth
         </div>
     </div>
 </div>

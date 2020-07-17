@@ -132,7 +132,7 @@ INSERT INTO `laravel`.`promotions`
 (3,'Sale Off 15% for Kids clothes',15,'2019-04-30','SALE4KID15','2019-04-11','ACTIVE'),
 (4,'Sale Off 10% for Men clothes',10,'2019-04-30','SALE4MEN10','2019-04-10','ACTIVE'),
 (5,'Sale Off 15% for Kids clothes',15,'2019-04-30','SALE4KID15','2019-04-11','ACTIVE'),
-(6,'Sale Off 20% for Women clothes',20,'2019-05-07','SALEOFF20','2019-03-28','ACTIVE'),
+(6,'Sale Off 20% for Women clothes',20,'2019-05-07','SALEOFF20','2019-03-28','ACTIVE');
 
 INSERT INTO `laravel`.`product_promotion` ( `product_id`, `promotion_id`) VALUES 
 (1,5),(1,4),(1,3),(1,2),(2,5),(2,4),(2,3),(2,2),(3,2),(3,3),(3,4),(4,2),(4,3),(4,4),(5,2),

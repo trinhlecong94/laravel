@@ -18,6 +18,7 @@ class CreateAccountsTable extends Migration
             $table->string('address', 255);
             $table->date('birthday', 255);
             $table->string('email', 45);
+            $table->string('remember_token', 100)->nullable();;
             $table->string('full_name', 45);
             $table->string('password', 255);
             $table->string('phone', 45);

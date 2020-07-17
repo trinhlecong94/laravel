@@ -53,10 +53,13 @@ class RegisterController extends Controller
         echo var_dump($data);
         //die();
         return Validator::make($data, [
-            'username' => ['required', 'string', 'max:255', 'unique:accounts'],
-            'address' => ['required', 'string', 'max:255', 'unique:accounts'],
+            'username' => ['required', 'string', 'max:255', ],
+            'address' => ['required', 'string', 'max:255', ],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:accounts'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'birthday' => ['required', 'string', 'min:8'],
+            'phone' => ['required', 'string', 'min:10'],
+            'full_name' => ['required', 'string', 'min:8'],
         ]);
     }
 
@@ -68,14 +71,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $time = strtotime($data['birthday']);
+        $newDateFormat =  date('Y-m-d',$time);
+
         $account =  Account::create([
             'username' => $data['username'],
             'address' => $data['address'],
-            'birthday' => '2020-10-10',
-            'email' => $data['address'],
-            'full_name' => $data['address'],
-            'status' => $data['address'],
-            'phone' => $data['email'],
+            'birthday' => $newDateFormat,
+            'email' => $data['email'],
+            'full_name' => $data['full_name'],
+            'status' => "ACTIVE",
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
         $account->roles()

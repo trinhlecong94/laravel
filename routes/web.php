@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', 'HomeController@index');
 Route::get('/', 'HomeController@index');
 Route::get('/product/{id}', 'HomeController@product');
+Route::get('/category/{id}', 'HomeController@category');
+Route::get('/admin', 'AdminController@index');
 
 
 

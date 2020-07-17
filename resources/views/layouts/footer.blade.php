@@ -15,9 +15,9 @@
                         </div>
                         <nav class="footer_nav ml-md-auto order-md-2 order-1">
                             <ul class="d-flex flex-row align-items-center justify-content-start">
-                                <li><a href="{{ url('/category?id=1&page=1') }}">Women</a></li>
-                                <li><a href="{{ url('/category?id=2&page=1') }}">Men</a></li>
-                                <li><a href="{{ url('/category?id=3&page=1') }}">Kids</a></li>
+                                <li><a href="{{ url('/category/1') }}">Women</a></li>
+                                <li><a href="{{ url('/category/2') }}">Men</a></li>
+                                <li><a href="{{ url('/category/3') }}">Kids</a></li>
                             </ul>
                         </nav>
                     </div>

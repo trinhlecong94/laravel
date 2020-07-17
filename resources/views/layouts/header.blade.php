@@ -12,9 +12,9 @@
         <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
         <nav class="main_nav">
             <ul class="d-flex flex-row align-items-start justify-content-start">
-                <li><a href="{{ url('/category?id=1&page=1') }}">Women</a></li>
-                <li><a href="{{ url('/category?id=2&page=1') }}">Men</a></li>
-                <li><a href="{{ url('/category?id=3&page=1') }}">Kids</a></li>
+                <li><a href="{{ url('/category/1') }}">Women</a></li>
+                <li><a href="{{ url('/category/2') }}">Men</a></li>
+                <li><a href="{{ url('/category/3') }}">Kids</a></li>
             </ul>
         </nav>
         <div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
@@ -28,20 +28,36 @@
             </div>
             <!-- User -->
 
-            <!-- <div><sec:authorize access="isAuthenticated()"><h4 style="color: #002752">Hi <sec:authentication property="principal.username" />!</h4></sec:authorize></div> -->
+            <div>
+                @auth
+                <h4 style="color: #002752">
+                    Hi {{ Auth::user()->username }}!
+                </h4>
+                @endauth
+            </div>
 
-            <div class="user"><a href="{{ url('/account') }}">
-                    <div><img src="{{ url('/images/user.svg') }}" alt=""></div>
-                </a></div>
+        
+            <div class="user">
+                <a href="{{ url('/login') }}">
+                    <div>
+                        <img src="{{ url('/images/user.svg') }}" alt="">
+                    </div>
+                </a>
+            </div>
+           
+
             <!-- Cart -->
             <div class="cart"><a href="{{ url('/cart') }}">
                     <div><img class="svg" src="{{ url('/images/cart.svg') }}" alt="">
 
-                        <!-- <c:if test="${order!=null}">
+                        <!-- 
+                            TO-DO
+                        <c:if test="${order!=null}">
                                 <div>
                                     ${fn:length(order.orderDetails)}
                                 </div>
-                            </c:if> -->
+                            </c:if> 
+                        -->
 
                     </div>
                 </a>

@@ -1,4 +1,4 @@
-@extends('layouts.app1')
+@extends('layouts.app')
 
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{ url('/styles/main_styles.css') }}">
@@ -13,7 +13,9 @@
                 </div>
             </div>
 
-            <c:if test="${param.action != null}">
+
+            
+                <!-- TO DO -->
                 <div class="row">
                     <div class="col-xl-12 col-md-12">
                         <div class="dropdown float-right">
@@ -29,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-            </c:if>
+         
 
             <div class="row products_row">
                 @if(!empty($data) && $data->count())
@@ -46,10 +48,10 @@
                                 <div>
                                     <div>
                                         <div class="product_name">
-                                            <a href="{{url('/product?id=${product.id}')}}"> {{ $value->name}}</a>
+                                            <a href="/product/{{$value->id}}"> {{ $value->name}}</a>
                                         </div>
                                         <div class="product_category">In
-                                            <a href="{{url('/category?id=${product.category.id}&page=1')}}">
+                                            <a href="/category/{{$value->categories->id}}">
                                                 {{ $value->categories->name }}
                                             </a>
                                         </div>
@@ -76,7 +78,6 @@
             <div class="row justify-content-md-center">
                 {!! $data->links() !!}
             </div>
-
         </div>
     </div>
 </div>

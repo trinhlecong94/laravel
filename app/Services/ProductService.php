@@ -31,5 +31,9 @@ class ProductService
         return Product::with('categories','images','comments','promotions','sizes','colors')->get()->find($id);
     }
 
+    public function findByCategory($id)
+    {
+        return Product::with('categories')->where('category_id', $id)->paginate(9);
+    }
 
 }
