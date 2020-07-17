@@ -12,8 +12,12 @@
     <link rel="stylesheet" type="text/css" href="{{ url('/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/plugins/OwlCarousel2-2.2.1/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('/styles/main_styles.css') }}">
+    
+    <link rel="stylesheet" type="text/css" href="{{ url('/plugins/flexslider/flexslider.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('/styles/responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('/styles/product.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('/styles/product_responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('/styles/comment.css') }}">
 </head>
 
 <body>
@@ -41,6 +45,10 @@
     <script src="{{ url('/plugins/progressbar/progressbar.min.js') }}"></script>
     <script src="{{ url('/plugins/parallax-js-master/parallax.min.js') }}"></script>
     <script src="{{ url('/js/custom.js') }}"></script>
+    <script src="{{ url('/js/product-script-custom.js') }}"></script>
+
+    <script src="{{ url('/plugins/flexslider/jquery.flexslider-min.js') }}"></script>
+    <script src="{{ url('/js/product.js') }}"></script>
     <script src="{{ url('/js/product-script-custom.js') }}"></script>
 </body>
 

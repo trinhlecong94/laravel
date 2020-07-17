@@ -29,9 +29,14 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $data = $this->productService->pagination();
-
-        // echo '<pre>' . var_export($data, true) . '</pre>';
-        // die();
         return view('pages.home', compact('data'));
+    }
+
+    public function product(Request $request,$id)
+    {
+        $product= $this->productService->findById($id);
+        // echo '<pre>'.var_export($product->colors,true)."</pre>";
+        // die();
+        return view('pages.product', compact('product'));
     }
 }

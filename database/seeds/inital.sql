@@ -102,3 +102,42 @@ INSERT INTO `laravel`.`images` (`id`, `delete_flag`, `name`, `url`,`product_id`)
 (108,0,"name",'https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/productimage/2019/3/22/8276a3b2-08d8-40ac-8913-9995fb000a391553258832169-3.jpg',1),
 (109,0,"name",'https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/productimage/2019/3/22/e0cbf320-9bd4-40c1-bf0c-76054a95b9741553258832198-4.jpg',1),
 (110,0,"name",'https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/productimage/2019/3/22/7b2beca2-a6be-40f5-ad0a-18f3580e87531553258832225-5.jpg',1);
+
+INSERT INTO `laravel`.`comments` (`id`,`date`, `content`, `product_id`, `account_id`)  VALUES
+(1,'2019-03-23','nice shirt, i really like it',1,1),
+(2,'2019-03-23','wow! perfect',3,1),
+(3,'2019-03-23','I like it',1,2),
+(4,'2019-04-05','so hot',1,1),
+(5,'2019-04-09','Nice',1,2),
+(6,'2019-04-09','Nice product',10,1),
+(7,'2019-04-17','This shirt is too beautiful',1,10);
+
+
+INSERT INTO `laravel`.`sizes` (`id`, `name`) VALUES  
+(1,'XS'),(2,'S'),(3,'M'),(4,'L'),(5,'XL'),(6,'XXL');
+
+
+INSERT INTO `laravel`.`product_size` (`product_id`, `size_id`) VALUES
+(1,5),(1,4),(1,3),(1,2),(2,5),(2,4),(2,3),(2,2),(3,2),(3,3),(3,4),
+(4,2),(4,3),(4,4),(5,2),(5,1),(6,2),(6,3),(6,4),(6,5),(7,2),(7,3),
+(7,4),(7,5),(8,3),(8,4),(8,5),(9,1),(9,2),(9,3),(9,4),(10,1),(10,2),
+(10,3),(10,4),(10,5),(11,1),(11,2),(11,3),(11,4),(12,2),(12,3),(12,4),
+(13,2),(13,3),(13,4),(13,5),(14,3),(14,4),(14,5),(15,1),(15,2),(15,3),
+(15,4),(16,1),(16,2),(16,3),(16,4),(17,3),(17,2),(17,1),(2,6);
+
+INSERT INTO `laravel`.`promotions` 
+(`id`, `description`, `discount`, `start_date`, `name`,`end_date`, `status`) VALUES 
+(1,'Sale Off 20% for Women clothes',20,'2019-05-07','SALEOFF20','2019-03-28','ACTIVE'),
+(2,'Sale Off 10% for Men clothes',10,'2019-04-30','SALE4MEN10','2019-04-10','ACTIVE'),
+(3,'Sale Off 15% for Kids clothes',15,'2019-04-30','SALE4KID15','2019-04-11','ACTIVE'),
+(4,'Sale Off 10% for Men clothes',10,'2019-04-30','SALE4MEN10','2019-04-10','ACTIVE'),
+(5,'Sale Off 15% for Kids clothes',15,'2019-04-30','SALE4KID15','2019-04-11','ACTIVE'),
+(6,'Sale Off 20% for Women clothes',20,'2019-05-07','SALEOFF20','2019-03-28','ACTIVE'),
+
+INSERT INTO `laravel`.`product_promotion` ( `product_id`, `promotion_id`) VALUES 
+(1,5),(1,4),(1,3),(1,2),(2,5),(2,4),(2,3),(2,2),(3,2),(3,3),(3,4),(4,2),(4,3),(4,4),(5,2),
+(5,1),(6,2),(6,3),(6,4),(6,5),(7,2),(7,3),(7,4),(7,5),(8,3),(8,4),(8,5),(9,1),(9,2),(9,3),
+(9,4),(10,1),(10,2),(10,3),(10,4),(10,5),(11,1),(11,2),(11,3),(11,4),(12,2),(12,3),(12,4),
+(13,2),(13,3),(13,4),(13,5),(14,3),(14,4),(14,5),(15,1),(15,2),(15,3),(15,4),(16,1),(16,2),
+(16,3),(16,4),(17,3),(17,2),(17,1),(2,6);
+

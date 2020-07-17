@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\Comment;
 use App\Repositories\Product\ProductRepositoryInterface;
 
 class ProductService
@@ -20,19 +21,14 @@ class ProductService
         $this->productRepository = $productRepository;
     }
 
-    public function find($id)
-    {
-        return $this->productRepository->findById($id);
-    }
-
-    public function getAll()
-    {
-        return $this->productRepository->getAll();
-    }
-
     public function pagination()
     {
         return Product::with('categories')->paginate(9);
+    }
+
+    public function findById($id)
+    {
+        return Product::with('categories','images','comments','promotions','sizes','colors')->get()->find($id);
     }
 
 

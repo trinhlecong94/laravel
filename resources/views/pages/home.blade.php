@@ -1,6 +1,7 @@
 @extends('layouts.app1')
 
 @section('content')
+<link rel="stylesheet" type="text/css" href="{{ url('/styles/main_styles.css') }}">
 <div class="super_container_inner">
     <div class="super_overlay"></div>
     <!-- Products -->
@@ -36,7 +37,7 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="product">
                         <div class="product_image">
-                            <a href="{{url('/product?id=${product.id}')}}">
+                            <a href="/product/{{$value->id}}">
                                 <img src="{{ $value->images[0]->url }}" alt="">
                             </a>
                         </div>
@@ -59,7 +60,7 @@
                                         <i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i>
                                         ??
                                     </div>
-                                    <div class="product_price text-right">{{ $value->price }}</div>
+                                    <div class="product_price text-right">{{ number_format($value->price, 1) }}</div>
                                 </div>
                             </div>
                         </div>
