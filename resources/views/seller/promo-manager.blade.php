@@ -13,7 +13,7 @@
             <div class="col">
                 <div class="page_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-center">
-                        <c:import url="../include/account-menu.jsp"></c:import>
+                    @include('layouts.account-menu')
                     </ul>
                 </div>
             </div>

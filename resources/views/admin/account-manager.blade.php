@@ -13,6 +13,7 @@
             <div class="col">
                 <div class="page_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-center">
+                        @include('layouts.account-menu')
                         <jsp:include page="../include/account-menu.jsp" />
                     </ul>
                 </div>
@@ -20,15 +21,17 @@
         </div>
         <div class="row" style="margin-top: 3em">
             <div class="col-xs-6 col-sm-6">
-                <button class="btn btn-primary" onclick="location.href = '/admin?action=add-account'">Add Account</button> </div>
+                <button class="btn btn-primary" onclick="location.href = '/admin/add-account'">Add Account</button> </div>
             <div class="col-xs-6 col-sm-6">
-                <form action="${pageContext.request.getContextPath()}/search" class="form-inline" style="float: right">
+
+                <form action="{{url('/search')}}" class="form-inline" style="float: right">
                     <div class="form-group">
                         <input type="hidden" name="action" value="searchAccount" />
                         <input type="text" name="searchText" class="form-control" />
                         <button type="submit" class="btn btn-primary" style="margin-left: 5px">Search</button>
                     </div>
                 </form>
+
             </div>
         </div>
         <div class="row mainmain">
@@ -44,24 +47,30 @@
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
-                    <c:forEach var="account" items="${accounts}">
-                        <tr>
-                            <td>${account.id}</td>
-                            <td>${account.username}</td>
-                            <td>${account.fullName}</td>
-                            <td>${account.email}</td>
-                            <td>${account.address}</td>
-                            <td>${account.roleString}</td>
-                            <c:if test="${account.status == 'ACTIVE'}">
-                                <td style="color: blue">${account.status}</td>
-                            </c:if>
-                            <c:if test="${account.status != 'ACTIVE'}">
-                                <td style="color: red">${account.status}</td>
-                            </c:if>
-                            <td><a href="{{ url('/admin/edit-account?id=${account.id}') }}> <i class=" fa fa-pencil" aria-hidden="true"></i></a></td>
-                        </tr>
-                    </c:forEach>
-
+                    @foreach($accounts as $key => $account)
+                    <tr>
+                        <td>{{$account->id}}</td>
+                        <td>{{$account->username}}</td>
+                        <td>{{$account->full_name}}</td>
+                        <td>{{$account->email}}</td>
+                        <td>{{$account->full_name}}</td>
+                        <td>
+                            @foreach($account->roles as $key => $role)
+                            {{$role->name}}<br>
+                            @endforeach
+                        </td>
+                        @if($account->status=='ACTIVE')
+                        <td style="color: blue">{{$account->status}}</td>
+                        @else
+                        <td style="color: red">{{$account->status}}</td>
+                        @endif
+                        <td>
+                            <a href="/admin/edit-account/{{ $account->id}}">
+                                <i class=" fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
                 </table>
             </div>
         </div>
@@ -69,22 +78,7 @@
             <div class="col">
                 <div class="page_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-center">
-                        <c:forEach begin="1" end="${page}" varStatus="status">
-                            <c:choose>
-                                <c:when test="${param.page==null && status.index==1}">
-                                    <li class="active"><a href="{{ url('/admin?action=account-manager&page=${status.index}')}} ">${status.index} </a> </li>
-                                </c:when>
-                                <c:when test="${param.page==null && status.index!=1}">
-                                    <li><a href="{{ url('/admin?action=account-manager&page=${status.index}')}} ">${status.index} </a> </li>
-                                </c:when>
-                                <c:when test="${param.page!=null && param.page==status.index}">
-                                    <li class="active"><a href="{{ url('/admin?action=account-manager&page=${status.index}')}} ">${status.index} </a> </li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="{{ url('/admin?action=account-manager&page=${status.index}')}} ">${status.index} </a> </li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
+                        {{ $accounts->links() }}
                     </ul>
                 </div>
             </div>

@@ -19,7 +19,10 @@ Route::get('/home', 'HomeController@index');
 Route::get('/', 'HomeController@index');
 Route::get('/product/{id}', 'HomeController@product');
 Route::get('/category/{id}', 'HomeController@category');
-Route::get('/admin', 'AdminController@index');
+
+Route::get('/admin/view-account', 'AdminController@viewAccount');
+Route::get('/admin/account-manager', 'AdminController@accountManager');
+Route::get('/admin/add-account', 'AdminController@addAccount');
 
 
 

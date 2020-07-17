@@ -18,7 +18,7 @@
                 <div class="col">
                     <div class="page_nav">
                         <ul class="d-flex flex-row align-items-start justify-content-center">
-                            <jsp:include page="../include/account-menu.jsp" />
+                        @include('layouts.account-menu')
                         </ul>
                     </div>
                 </div>
