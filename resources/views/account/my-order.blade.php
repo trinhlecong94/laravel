@@ -20,7 +20,7 @@
             <div class="col">
                 <div class="page_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-center">
-                    @include('layouts.account-menu')
+                        @include('layouts.account-menu')
                     </ul>
                 </div>
             </div>
@@ -40,69 +40,43 @@
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
-                        <c:forEach var="o" items="${orders}">
-                            <c:forEach var="od" items="${o.orderDetails}" varStatus="status">
-                                <tr>
-                                    <c:if test="${status.index == 0}">
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.id}</td>
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.orderDate}</td>
-                                    </c:if>
-                                    <td class="align-middle"><a href="{{ url('//product?id=${od.product.id') }}"><img src="${od.product.images[0].url}" class="img-thumbnail-list" />${od.product.name}</a></td>
-                                    <td class="align-middle">${od.size.size}</td>
-                                    <td class="align-middle">${od.quantity}</td>
-                                    <td class="align-middle">${od.product.price}</td>
-                                    <c:if test="${status.index == 0}">
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.totalPrice}</td>
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.status}</td>
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">
-                                            <c:if test="${o.status == 'PENDING'}">
-                                                <button onclick="cancelOrder()" class="btn"><i class="fa fa-trash"></i></button>
-                                            </c:if>
-                                        </td>
-                                    </c:if>
-                                </tr>
-                            </c:forEach>
-                        </c:forEach>
-                        <c:if test="${fn:length(orders)==0}">
-                            <tr>
-                                <td colspan="9" style="text-align: center">No Order</td>
-                            </tr>
-                        </c:if>
+                        @foreach($orders as $key => $order)
+                        @foreach($order->orderDetails as $key => $orderDetail)
+                        <tr>
+                            @if($loop->index==0)
+                            <td class="align-middle" rowspan="{{ count($order->orderDetails) }}">{{$order->id}}</td>
+                            <td class="align-middle" rowspan="{{ count($order->orderDetails) }}">{{$order->date}}</td>
+                            @endif
+                            <td class="align-middle"><a href="/product/{{$orderDetail->product->id}}"><img src="{{$orderDetail->product->images[0]->url}}" class="img-thumbnail-list" />{{$orderDetail->product->name}}</a>
+                            </td>
+                            <td class="align-middle">{{$orderDetail->size->name}}</td>
+                            <td class="align-middle">{{$orderDetail->quantity}}</td>
+                            <td class="align-middle">{{$orderDetail->product->price}}</td>
+                            @if($loop->index==0)
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->prices}}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->statusToString()}}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">
+                                @if($order->status=='PENDING')
+                                <button onclick="cancelOrder({{$order->id}})" class="btn"><i class="fa fa-trash"></i></button>
+                                @endif
+                            </td>
+                            @endif
+                        </tr>
+                        @endforeach
+                        @endforeach
+                        @if(count($orders)==0)
+                        <tr>
+                            <td colspan="9" style="text-align: center">No Order</td>
+                        </tr>
+                        @endif
                     </table>
                 </div>
             </div>
         </div>
-        <div class="row page_nav_row">
-            <div class="col">
-                <div class="page_nav">
-                    <ul class="d-flex flex-row align-items-start justify-content-center">
-                        <c:forEach begin="1" end="${page}" varStatus="status">
-                            <c:choose>
-                                <c:when test="${param.page==null && status.index==1}">
-                                    <li class="active"><a href="{{ url('/account?action=myorder&page=${status.index}') }}">${status.index}</a></li>
-                                </c:when>
-                                <c:when test="${param.page==null && status.index!=1}">
-                                    <li><a href="{{ url('/account?action=myorder&page=${status.index}') }}">${status.index}</a></li>
-                                </c:when>
-                                <c:when test="${param.page!=null && param.page==status.index}">
-                                    <li class="active"><a href="{{ url('/account?action=myorder&page=${status.index}') }}>">${status.index}</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="{{ url('/account?action=myorder&page=${status.index}') }} ">${status.index}</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
     </div>
     <!-- profile -->
-
-
-
 </div>
-
 <script>
     function cancelOrder(id) {
         var r = confirm("Do you want to cancel an order with id: " + id);

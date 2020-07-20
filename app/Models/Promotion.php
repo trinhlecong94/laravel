@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
+use App\Enums\Status as EnumStatus;
 use Illuminate\Database\Eloquent\Model;
-
 
 class Promotion extends Model
 {
-    public function color()
-    {
-        return $this->hasOne(Color::class);
-    }
-
     public function products()
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    public function statusToString()
+    {
+        return EnumStatus::getKey($this->status);
     }
 }

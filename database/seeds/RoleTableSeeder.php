@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Role;
+use App\Enums\Role as RoleEnum;
 
 class RoleTableSeeder extends Seeder
 {
@@ -12,16 +13,17 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        $role_employee = new Role();
-        $role_employee->name = 'ROLE_ADMIN';
-        $role_employee->save();
-
-        $role_employee = new Role();
-        $role_employee->name = 'ROLE_SELLER';
-        $role_employee->save();
 
         $role_manager = new Role();
-        $role_manager->name = 'ROLE_USER';
+        $role_manager->name = RoleEnum::ROLE_USER;
         $role_manager->save();
+
+        $role_employee = new Role();
+        $role_employee->name = RoleEnum::ROLE_SELLER;
+        $role_employee->save();
+
+        $role_employee = new Role();
+        $role_employee->name = RoleEnum::ROLE_ADMIN;
+        $role_employee->save();
     }
 }

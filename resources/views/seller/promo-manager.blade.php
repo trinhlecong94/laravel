@@ -13,23 +13,25 @@
             <div class="col">
                 <div class="page_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-center">
-                    @include('layouts.account-menu')
+                        @include('layouts.account-menu')
                     </ul>
                 </div>
             </div>
         </div>
         <div class="row" style="margin-top: 3em">
             <div class="col-xs-6 col-sm-6">
-                <button class="btn btn-primary" onclick="location.href = '/seller?action=add-promo'">Add promotion</button>
+                <button class="btn btn-primary" onclick="location.href = '/seller/add-promo'">Add promotion</button>
             </div>
             <div class="col-xs-6 col-sm-6">
-                <form action="${pageContext.request.getContextPath()}/search" class="form-inline" style="float: right">
+
+                <!-- TODO -->
+                <form action="" class="form-inline" style="float: right">
                     <div class="form-group">
-                        <input type="hidden" name="action" value="searchPromotion" />
                         <input type="text" name="searchText" class="form-control" />
                         <button type="submit" class="btn btn-primary" style="margin-left: 5px">Search</button>
                     </div>
                 </form>
+
             </div>
         </div>
         <div class="row mainmain">
@@ -45,23 +47,27 @@
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
-                    <c:forEach var="promo" items="${promos}">
-                        <tr>
-                            <td class="align-middle">${promo.id}</td>
-                            <td class="align-middle">${promo.name}</td>
-                            <td class="align-middle">${promo.discount}</td>
-                            <td class="align-middle">${promo.productListFormat}</td>
-                            <td class="align-middle">${promo.startDate}</td>
-                            <td class="align-middle">${promo.endDate}</td>
-                            <c:if test="${promo.status =='ACTIVE'}">
-                                <td class="align-middle" style="color: blue">${promo.status}</td>
-                            </c:if>
-                            <c:if test="${promo.status !='ACTIVE'}">
-                                <td class="align-middle" style="color: red">${promo.status}</td>
-                            </c:if>
-                            <td class="align-middle"><a href="/seller?action=edit-promo&id=${promo.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                        </tr>
-                    </c:forEach>
+                    @foreach($promos as $key => $promo)
+                    <tr>
+                        <td class="align-middle">{{ $promo->id }}</td>
+                        <td class="align-middle">{{ $promo->name }}</td>
+                        <td class="align-middle">{{ $promo->discount }}</td>
+                        <td class="align-middle">
+                            @foreach($promo->products as $key => $product )
+                            {{ $product->name }}
+                            <br>
+                            @endforeach
+                        </td>
+                        <td class="align-middle">{{ $promo->start_date }}</td>
+                        <td class="align-middle">{{ $promo->end_date }}</td>
+                        @if($promo->statusToString()=="ACTIVE")
+                        <td class="align-middle" style="color: blue">{{$promo->statusToString()}}</td>
+                        @else
+                        <td class="align-middle" style="color: red">{{$promo->statusToString()}}</td>
+                        @endif
+                        <td class="align-middle"><a href="/seller/edit-promo/{{$promo->id}}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                    </tr>
+                    @endforeach
                 </table>
             </div>
         </div>
@@ -69,27 +75,11 @@
             <div class="col">
                 <div class="page_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-center">
-                        <c:forEach begin="1" end="${page}" varStatus="status">
-                            <c:choose>
-                                <c:when test="${param.page==null && status.index==1}">
-                                    <li class="active"><a href="/seller?action=promo-manager&page=${status.index}">${status.index}</a></li>
-                                </c:when>
-                                <c:when test="${param.page==null && status.index!=1}">
-                                    <li><a href="/seller?action=promo-manager&page=${status.index}">${status.index}</a></li>
-                                </c:when>
-                                <c:when test="${param.page!=null && param.page==status.index}">
-                                    <li class="active"><a href="/seller?action=promo-manager&page=${status.index}">${status.index}</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="/seller?action=promo-manager&page=${status.index}">${status.index}</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
+                        {{ $promos->links() }}
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- profile -->
 </div>
 @endsection

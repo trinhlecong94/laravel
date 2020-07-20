@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Role;
+use App\Enums\Role as EnumRole;
 
 class RegisterController extends Controller
 {
@@ -50,8 +51,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        echo var_dump($data);
-        //die();
         return Validator::make($data, [
             'username' => ['required', 'string', 'max:255', ],
             'address' => ['required', 'string', 'max:255', ],
@@ -80,7 +79,7 @@ class RegisterController extends Controller
             'birthday' => $newDateFormat,
             'email' => $data['email'],
             'full_name' => $data['full_name'],
-            'status' => "ACTIVE",
+            'status' => EnumRole::ROLE_USER,
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);

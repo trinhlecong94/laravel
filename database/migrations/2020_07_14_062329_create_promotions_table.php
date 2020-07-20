@@ -20,7 +20,7 @@ class CreatePromotionsTable extends Migration
             $table->integer('discount');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('status', 45);
+            $table->integer('status');
             $table->timestamps();
         });
     }

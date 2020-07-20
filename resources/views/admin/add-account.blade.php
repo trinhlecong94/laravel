@@ -13,16 +13,15 @@
             <div class="col">
                 <div class="page_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-center">
-                    @include('layouts.account-menu')
+                        @include('layouts.account-menu')
                     </ul>
                 </div>
             </div>
         </div>
         <div class="row mainmain">
             <div class="col-xs-12 col-sm-12">
-                <p style="font-size: 150%;color: red;text-align: center">${messageError}</p>
-                <p style="font-size: 150%;color: blue;text-align: center">${messageSuccess}</p>
-                <f:form action="${pageContext.request.getContextPath()}/admin/add-account" method="post" modelAttribute="account" class="form-horizontal">
+                <form>
+
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <tr>
@@ -44,21 +43,26 @@
                             <tr>
                                 <th>Role</th>
                                 <td>
-                                    <c:forEach items="${roles}" var="role">
-                                        <label class="radio-inline" style="margin-right: 7px">
-                                            <input type="radio" name="roleradio" value="${role.id}" <c:if test="${role.roles == 'ROLE_USER'}">checked</c:if>>${role.roles}
-                                        </label>
-                                    </c:forEach>
+                                    @foreach($roles as $key => $role)     
+                                    <label class="radio-inline" style="margin-right: 7px">
+                                        <input type="radio" name="roleradio" value="{{$role->id}}" 
+                                        @if($role->roleString() == 'ROLE_USER') checked
+                                        @endif >
+                                        {{$role->roleString()}}
+                                    </label>
+                                    @endforeach
                                 </td>
                             </tr>
                         </table>
                     </div>
+
                     <div class="form-group">
                         <div class="col-sm-12 col-xs-12" style="text-align: center">
                             <button type="submit" class="btn btn-primary">Add</button>
                         </div>
                     </div>
-                </f:form>
+                    
+                </form>
             </div>
         </div>
     </div>

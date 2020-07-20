@@ -50,8 +50,8 @@
                             {{$product->name}}
                         </div>
                         <div class="product_category">In
-                            <a href="/category/{{$product->categories->id}}">
-                                {{$product->categories->name}}
+                            <a href="/category/{{$product->category->id}}">
+                                {{$product->category->name}}
                             </a>
                         </div>
                         <div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
@@ -85,7 +85,7 @@
                             @endif
                         </div>
                         <div class="product_text">
-                            <p>Product Color: {{$product->colors->name}}</p>
+                            <p>Product Color: {{$product->color->name}}</p>
                             <p>Product Code: {{$product->code}}</p>
                             <p>Brand: {{$product->brand}}</p>
                             <p>Description: {{$product->description}}</p>
@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center" onclick="location.href = '/order/${product.id}' + getSizeSelected();">
+                                <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center" onclick="location.href = '/order/{{ $product->id }}' + '/'+getSizeSelected();">
                                     <div>
                                         <div><img src="/images/cart.svg" class="svg" alt="">
                                             <div>+</div>
@@ -137,7 +137,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">{{ $comment->accounts->full_name }}
+                    <h4 class="media-heading">{{ $comment->account->full_name }}
                         <span>
                             {{ $comment->date }}
                         </span>

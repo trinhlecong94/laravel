@@ -13,25 +13,23 @@
                 </div>
             </div>
 
-
-            
-                <!-- TO DO -->
-                <div class="row">
-                    <div class="col-xl-12 col-md-12">
-                        <div class="dropdown float-right">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Sort by
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{ url('/search?action=searchProduct&searchText=${param.searchText}&sort=Latest') }}">Latest</a>
-                                <a class="dropdown-item" href="{{ url('/search?action=searchProduct&searchText=${param.searchText}&sort=Oldest') }}">Oldest</a>
-                                <a class="dropdown-item" href="{{ url('/search?action=searchProduct&searchText=${param.searchText}&sort=HightoLow') }}">Price: High to Low</a>
-                                <a class="dropdown-item" href="{{ url('/search?action=searchProduct&searchText=${param.searchText}&sort=LowtoHigh') }}">Price: Low to High</a>
-                            </div>
+            <!-- TO DO -->
+            <div class="row">
+                <div class="col-xl-12 col-md-12">
+                    <div class="dropdown float-right">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort by
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{ url('/search?searchText='.app('request')->input('searchText').'&sort=Latest') }}">Latest</a>
+                            <a class="dropdown-item" href="{{ url('/search?searchText='.app('request')->input('searchText').'&sort=Oldest') }}">Oldest</a>
+                            <a class="dropdown-item" href="{{ url('/search?searchText='.app('request')->input('searchText').'&sort=HightoLow') }}">Price: High to Low</a>
+                            <a class="dropdown-item" href="{{ url('/search?earchText='.app('request')->input('searchText').'&sort=LowtoHigh') }}">Price: Low to High</a>
                         </div>
                     </div>
                 </div>
-         
+            </div>
+
 
             <div class="row products_row">
                 @if(!empty($data) && $data->count())
@@ -51,8 +49,8 @@
                                             <a href="/product/{{$value->id}}"> {{ $value->name}}</a>
                                         </div>
                                         <div class="product_category">In
-                                            <a href="/category/{{$value->categories->id}}">
-                                                {{ $value->categories->name }}
+                                            <a href="/category/{{$value->category->id}}">
+                                                {{ $value->category->name }}
                                             </a>
                                         </div>
                                     </div>
@@ -76,7 +74,7 @@
                 @endif
             </div>
             <div class="row justify-content-md-center">
-                {!! $data->links() !!}
+                {!! $data->appends(request()->query())->links() !!}
             </div>
         </div>
     </div>

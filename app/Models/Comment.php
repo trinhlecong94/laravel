@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    public function accounts()
+    public function account()
     {
         return $this->belongsTo(Account::class,"account_id");
     }
 
-    public function products()
+    public function product()
     {
         return $this->hasOne(Product::class);
     }

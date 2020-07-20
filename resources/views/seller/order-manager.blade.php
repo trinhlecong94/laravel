@@ -18,7 +18,7 @@
                 <div class="col">
                     <div class="page_nav">
                         <ul class="d-flex flex-row align-items-start justify-content-center">
-                        @include('layouts.account-menu')
+                            @include('layouts.account-menu')
                         </ul>
                     </div>
                 </div>
@@ -28,9 +28,8 @@
                     <a href="{{ url('/downloadOrderExcel')}}"><i class="fa fa-download" aria-hidden="true"></i> Export to Excel</a>
                 </div>
                 <div class="col-xs-6 col-sm-6">
-                    <form action="${pageContext.request.getContextPath()}/search" class="form-inline" style="float: right">
+                    <form action="" class="form-inline" style="float: right">
                         <div class="form-group">
-                            <input type="hidden" name="action" value="searchOrderSeller" />
                             <input type="text" name="searchText" class="form-control" />
                             <button type="submit" class="btn btn-primary" style="margin-left: 5px">Search</button>
                         </div>
@@ -52,29 +51,37 @@
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
-                        <c:forEach var="o" items="${orders}">
-                            <c:forEach var="od" items="${o.orderDetails}" varStatus="status">
-                                <tr>
-                                    <c:if test="${status.index == 0}">
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.id}</td>
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.orderDate}</td>
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.account.username}</td>
-                                    </c:if>
-                                    <td class="align-middle"><a href="{{url('/product?id=${od.product.id}')}}">${od.product.name}</a></td>
-                                    <td class="align-middle">${od.size.size}</td>
-                                    <td class="align-middle">${od.quantity}</td>
-                                    <td class="align-middle">${od.product.price}</td>
-                                    <c:if test="${status.index == 0}">
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.totalPrice}</td>
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">${o.status}</td>
-                                        <td class="align-middle" rowspan="${o.orderDetails.size()}">
-                                            <button onclick="window.location.href = 'seller?action=update-order&id=' + {oid};" class="btn"><i class="fa fa-pencil-square-o"></i></button>
-                                        </td>
-                                    </c:if>
-                                </tr>
-                            </c:forEach>
-
-                        </c:forEach>
+                        @foreach($orders as $key => $order)
+                        @foreach($order->orderDetails as $key => $orderDetail)
+                        <tr>
+                            @if($loop->index==0)
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->id}}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->date}}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->account->username}}</td>
+                            @endif
+                            <td class="align-middle"><a href="/product/{{$orderDetail->product->id}}">{{$orderDetail->product->name}}</a></td>
+                            <td class="align-middle">{{$orderDetail->size->name}}</td>
+                            <td class="align-middle">{{$orderDetail->quantity}}</td>
+                            <td class="align-middle">{{$orderDetail->product->price}}</td>
+                            @if($loop->index == 0)
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->prices}}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->statusToString()}}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">
+                                <form action="" method="post">
+                                    @csrf
+                                    <input type="hidden" name="orderID" value="{{ $order->id }}">
+                                    <select class="form-control" name='status' onchange='if(this.value != 0) { this.form.submit(); }'>
+                                        <option value='0'>Change status</option>
+                                        @foreach($status as $key => $s)
+                                        <option value='{{$s}}'>{{$s}}</option>
+                                        @endforeach
+                                    </select>
+                                </form>
+                            </td>
+                            @endif
+                        </tr>
+                        @endforeach
+                        @endforeach
                     </table>
                 </div>
             </div>
@@ -82,22 +89,7 @@
                 <div class="col">
                     <div class="page_nav">
                         <ul class="d-flex flex-row align-items-start justify-content-center">
-                            <c:forEach begin="1" end="${page}" varStatus="status">
-                                <c:choose>
-                                    <c:when test="${param.page==null && status.index==1}">
-                                        <li class="active"><a href="{{url('/seller?action=order-manager&page=')}}">${status.index} </a> </li>
-                                    </c:when>
-                                    <c:when test="${param.page==null && status.index!=1}">
-                                        <li><a href="{{url('/seller?action=order-manager&page=')}}">">${status.index} </a> </li>
-                                    </c:when>
-                                    <c:when test="${param.page!=null && param.page==status.index}">
-                                        <li class="active"><a href="{{url('/seller?action=order-manager&page=')}}">">${status.index} </a> </li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><a href="{{url('/seller?action=order-manager&page=')}}">${status.index} </a> </li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
+                            {{ $orders->links() }}
                         </ul>
                     </div>
                 </div>

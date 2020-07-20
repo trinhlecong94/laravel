@@ -14,7 +14,7 @@ $factory->define(App\Models\Account::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'full_name' => $faker->name,
         'phone' => $faker->phoneNumber,
-        'status' => Str::random(10),
+        'status' => rand(0,1),
         'username' => $faker->username,
         'password' => Hash::make('password'),
         'created_at' => new DateTime,

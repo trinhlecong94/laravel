@@ -20,9 +20,9 @@
         </div>
         <div class="row mainmain">
             <div class="col-xs-12 col-sm-12">
-                <p style="font-size: 150%;color: red;text-align: center">${messageError}</p>
-                <p style="font-size: 150%;color: blue;text-align: center">${messageSuccess}</p>
-                <f:form action="${pageContext.request.getContextPath()}/seller/add-product" method="post" modelAttribute="product" class="form-horizontal">
+
+                <form method="POST" action="add-product">
+                    @csrf
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <tr>
@@ -40,10 +40,10 @@
                             <tr>
                                 <th>Category</th>
                                 <td>
-                                    <select class="form-control" name="category.id">
-                                        <c:forEach var="category" items="${categorys}">
-                                            <option value="${category.id}">${category.name}</option>
-                                        </c:forEach>
+                                    <select class="form-control" name="categoryId">
+                                        @foreach($categories as $key => $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                             </tr>
@@ -58,19 +58,19 @@
                             <tr>
                                 <th>Color</th>
                                 <td>
-                                    <select class="form-control" name="color.id">
-                                        <c:forEach var="color" items="${colors}">
-                                            <option value="${color.id}">${color.color}</option>
-                                        </c:forEach>
+                                    <select class="form-control" name="colorId">
+                                        @foreach($colors as $key => $color)
+                                        <option value="{{$color->id}}">{{$color->name}}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Size</th>
                                 <td>
-                                    <c:forEach items="${sizes}" var="size">
-                                        <label class="checkbox-inline"><input type="checkbox" name="size" value="${size.id}">${size.size}</label>
-                                    </c:forEach>
+                                    @foreach($sizes as $key => $size)
+                                    <label class="checkbox-inline"><input type="checkbox" name="size[{{$size->id}}]" value="{{$size->id}}">{{$size->name}}</label>
+                                    @endforeach
                                 </td>
                             </tr>
                             <tr>
@@ -84,7 +84,7 @@
                             <button type="submit" class="btn btn-primary">Add</button>
                         </div>
                     </div>
-                </f:form>
+                </form>
             </div>
         </div>
 

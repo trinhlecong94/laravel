@@ -56,16 +56,17 @@
                         <td>{{$account->full_name}}</td>
                         <td>
                             @foreach($account->roles as $key => $role)
-                            {{$role->name}}<br>
+                            {{$role->roleString()}}
+                            <br>
                             @endforeach
                         </td>
                         @if($account->status=='ACTIVE')
-                        <td style="color: blue">{{$account->status}}</td>
+                        <td style="color: blue">{{$account->statusToString()}}</td>
                         @else
-                        <td style="color: red">{{$account->status}}</td>
+                        <td style="color: red">{{$account->statusToString()}}</td>
                         @endif
                         <td>
-                            <a href="/admin/edit-account/{{ $account->id}}">
+                            <a href="/admin/view-account/{{ $account->id}}">
                                 <i class=" fa fa-pencil" aria-hidden="true"></i>
                             </a>
                         </td>

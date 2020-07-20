@@ -23,17 +23,17 @@ class ProductService
 
     public function pagination()
     {
-        return Product::with('categories')->paginate(9);
+        return Product::with('category')->paginate(9);
     }
 
     public function findById($id)
     {
-        return Product::with('categories','images','comments','promotions','sizes','colors')->get()->find($id);
+        return Product::with('category','images','comments','promotions','sizes','color')->get()->find($id);
     }
 
     public function findByCategory($id)
     {
-        return Product::with('categories')->where('category_id', $id)->paginate(9);
+        return Product::with('category')->where('category_id', $id)->paginate(9);
     }
 
 }

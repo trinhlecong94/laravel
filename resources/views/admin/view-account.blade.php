@@ -13,70 +13,125 @@
             <div class="col">
                 <div class="page_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-center">
-                    @include('layouts.account-menu')
+                        @include('layouts.account-menu')
                     </ul>
                 </div>
             </div>
         </div>
         <div class="row mainmain">
             <div class="col-xs-12 col-sm-12">
-                <p style="font-size: 150%;color: red;text-align: center">${messageError}</p>
-                <p style="font-size: 150%;color: blue;text-align: center">${messageSuccess}</p>
-                <f:form action="${pageContext.request.getContextPath()}/admin/update-account" method="post" modelAttribute="account" class="form-horizontal">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>Full name <span style="color: red">(*)</span></th>
-                                <td><input type="text" name="fullName" value="${account.fullName}" pattern="[A-Za-z ]{3,50}" title="Only letters and space are allowed, length 3-50" class="form-control" required /></td>
-                            </tr>
-                            <tr>
-                                <th>Email <span style="color: red">(*)</span></th>
-                                <td><input type="email" name="email" value="${account.email}" class="form-control" required /></td>
-                            </tr>
-                            <tr>
-                                <th>Phone</th>
-                                <td><input type="text" name="phone" value="${account.phone}" pattern="[0-9]{10,11}" title="Only numbers are allowed, length 10-11" class="form-control" /></td>
-                            </tr>
-                            <tr>
-                                <th>Birthday</th>
-                                <td><input type="date" name="birthday" value="${account.birthday}" class="form-control" /></td>
-                            </tr>
-                            <tr>
-                                <th>Address</th>
-                                <td><input type="text" name="address" value="${account.address}" class="form-control" /></td>
-                            </tr>
-                            <tr>
-                                <th>Role</th>
-                                <td>
-                                    <c:forEach items="${roles}" var="role">
-                                        <label class="radio-inline" style="margin-right: 7px">
-                                            <input type="radio" name="roleradio" value="${role.id}" <c:if test="${account.roleString==role.roleString}">checked</c:if>>${role.roleString}
-                                        </label>
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td>
-                                    <c:forEach var="status" items="${activeStatus}">
-                                        <label class="radio-inline" style="margin-right: 7px">
-                                            <input type="radio" name="statusradio" value="${status}" <c:if test="${account.status==status}">checked</c:if>>${status}
-                                        </label>
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <input type="hidden" name="id" value="${account.id}" />
-                    <div class="form-group">
-                        <div class="col-sm-12 col-xs-12" style="text-align: center">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                <form method="POST" action="{{{ url('/admin/update-account') }}}">
+                    @csrf
+                    <input type="hidden" name="userId" value="{{$account->id}}">
+                    
+                    <div class="form-group row">
+                        <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="col-md-6">
+                            <input readonly="readonly" id="username" type="text" class="form-control @error('email') is-invalid @enderror" name="username" value="{{$account->username}}" required autocomplete="email">
                         </div>
                     </div>
-                </f:form>
+
+                    <div class="form-group row">
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="col-md-6">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$account->email}}" required autocomplete="email">
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
+                        <div class="col-md-6">
+                            <input id="phone" type="tel" pattern="^0[0-9]{9}$" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{$account->phone}}" required autocomplete="phone">
+                            @error('phone')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="full_name" class="col-md-4 col-form-label text-md-right">{{ __('Full name') }}</label>
+                        <div class="col-md-6">
+                            <input id="full_name" type="text" class="form-control @error('full_name') is-invalid @enderror" name="full_name" value="{{$account->full_name}}" required autocomplete="full_name">
+                            @error('full_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="birthday" class="col-md-4 col-form-label text-md-right">{{ __('Birthday') }}</label>
+                        <div class="col-md-6">
+                            <input id="birthday" type="date" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{$account->birthday}}" required autocomplete="birthday">
+                            @error('birthday')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                        <div class="col-md-6">
+                            <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{$account->address}}" required autocomplete="address">
+                            @error('address')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                        <div class="col-md-6">
+                            <input type="checkbox" id="ROLE_USER" name="role[0]" value="ROLE_USER" @foreach($account->roles as $key=>$role)
+                            @if($role->roleString()=="ROLE_USER") checked @endif @endforeach>
+                            <label for="ROLE_USER"> ROLE_USER</label><br>
+                            <input type="checkbox" id="ROLE_SELLER" name="role[1]" value="ROLE_SELLER" @foreach($account->roles as $key=>$role)
+                            @if($role->roleString()=="ROLE_SELLER") checked @endif @endforeach>
+                            <label for="ROLE_SELLER"> ROLE_SELLER</label><br>
+                            <input type="checkbox" id="ROLE_ADMIN" name="role[2]" value="ROLE_ADMIN" @foreach($account->roles as $key=>$role)
+                            @if($role->roleString()=="ROLE_ADMIN") checked @endif @endforeach>
+                            <label for="ROLE_ADMIN"> ROLE_ADMIN</label><br><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="status" value="ACTIVE" @if($account->status=='ACTIVE') checked @endif >ACTIVE
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="status" value="INACTIVE" @if($account->status!='ACTIVE') checked @endif>INACTIVE
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-6">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Update') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-
     </div>
 </div>
 @endsection

@@ -22,7 +22,7 @@ class CreateAccountsTable extends Migration
             $table->string('full_name', 45);
             $table->string('password', 255);
             $table->string('phone', 45);
-            $table->string('status', 45);
+            $table->integer('status');
             $table->string('username', 45);
             $table->timestamps();
         });

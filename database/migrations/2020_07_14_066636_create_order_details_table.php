@@ -19,7 +19,7 @@ class CreateOrderDetailsTable extends Migration
             $table->timestamps();
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->integer('promotion_id')->unsigned();
+            $table->integer('promotion_id')->unsigned()->nullable();
             $table->foreign('promotion_id')->references('id')->on('promotions');
             $table->integer('order_id')->unsigned();
             $table->foreign('order_id')->references('id')->on('orders');

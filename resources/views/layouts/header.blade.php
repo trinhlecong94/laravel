@@ -21,7 +21,6 @@
             <!-- Search -->
             <div class="header_search">
                 <form action="{{ url('/search') }}" id="header_search_form">
-                    <input type="hidden" name="action" value="searchProduct" />
                     <input type="text" name="searchText" class="search_input" placeholder="Search Item" required="required">
                     <button class="header_search_button"><img src="{{ url('/images/search.png') }}" alt=""></button>
                 </form>
@@ -35,17 +34,22 @@
                 </h4>
                 @endauth
             </div>
-
-        
             <div class="user">
+                @auth
+                <a href="{{ url('/account/profile') }}">
+                    <div>
+                        <img src="{{ url('/images/user.svg') }}" alt="">
+                    </div>
+                </a>
+                @endauth
+                @guest
                 <a href="{{ url('/login') }}">
                     <div>
                         <img src="{{ url('/images/user.svg') }}" alt="">
                     </div>
                 </a>
+                @endguest
             </div>
-           
-
             <!-- Cart -->
             <div class="cart"><a href="{{ url('/cart') }}">
                     <div><img class="svg" src="{{ url('/images/cart.svg') }}" alt="">

@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('description', 255);
             $table->double('price', 8,2);
             $table->date('date', 45);
-            $table->string('status', 45);
+            $table->integer('status');
             $table->timestamps();
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
