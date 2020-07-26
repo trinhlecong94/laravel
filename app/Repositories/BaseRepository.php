@@ -4,23 +4,10 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class BaseRepository
- *
- * @package App\Repositories
- */
 class BaseRepository implements RepositoryInterface
 {
-    /**
-     * @var Model
-     */
     protected $model;
 
-    /**
-     * BaseRepository constructor.
-     *
-     * @param Model $model
-     */
     public function __construct(Model $model)
     {
         $this->model = $model;
@@ -59,7 +46,6 @@ class BaseRepository implements RepositoryInterface
         $result = $this->findById($id);
         if ($result) {
             $result->delete();
-
             return true;
         }
         return false;

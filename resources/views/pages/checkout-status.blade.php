@@ -2,8 +2,13 @@
 
 @section('content')
 <div class="container" style="text-align: center;margin-top: 150px;margin-bottom: 300px;">
-    <h1 style="color: blue">${messageSuccess}</h1>
-    <h1 style="color: red">${messageError}</h1>
-    <c:if test="${messageSuccess != null}">
-        <a href="<c:url value="/order-detail?id=${id}&email=${email}"> </c:url>">Click here to view order status</a> </c:if> </div> </div>
-        @endsection
+    @if( !isset($messageSuccess))
+    <h1 style="color: blue">Thank you for your purchase</h1>
+    <a href="{{ url('/order-detail/'.$orderId) }}">
+        Click here to view order status
+    </a>
+    @else
+    <h1 style="color: red">An error occurred on the server. Please try to place the order again</h1>
+    @endif
+</div>
+@endsection

@@ -29,7 +29,6 @@ class AccountController extends Controller
         AccountRepositoryInterface $accountRepository,
         RoleRepositoryInterface $roleRepository
     ) {
-        $this->middleware('auth');
         $this->accountRepository = $accountRepository;
         $this->roleRepository = $roleRepository;
     }
@@ -58,7 +57,7 @@ class AccountController extends Controller
 
         $account->save();
 
-        return redirect()->action('AccountController@profile');
+        return redirect()->action('Account\AccountController@profile');
     }
 
     public function myOrder()

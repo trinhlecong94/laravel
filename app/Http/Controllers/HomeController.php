@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Shipping;
+use App\Models\Comment;
 use App\Enums\OrderStatus as EnumOrderStatus;
-use Illuminate\Http\Request;
 use App\Services\ProductService;
 use DateTime;
-use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
 {
@@ -78,14 +79,16 @@ class HomeController extends Controller
 
     public function checkoutProcess(Request $request)
     {
-     
+        if (!$request->session()->has('order')) {
+            return abort(404);
+        }
+
         $shipping = new Shipping();
-      
+
         $shipping->address = $request->address;
         $shipping->email = $request->email;
         $shipping->phone = $request->phone;
         $shipping->full_name = $request->fullName;
-
         $shipping->save();
 
         if ($request->session()->has('order')) {
@@ -99,15 +102,42 @@ class HomeController extends Controller
         $order->save();
 
         foreach ($order->orderDetails as $key => $orderDetail) {
-            $orderDetail->order_id=$order->id;
+            $orderDetail->order_id = $order->id;
             $orderDetail->save();
         }
         $request->session()->forget('order');
-        return view('pages.checkout', compact('order'));
+
+        $orderId = $order->id;
+        return view('pages.checkout-status', compact('orderId'));
     }
 
-    public function orderDetail(Request $request)
+    public function orderDetail(Request $request, $id)
     {
-        return view('pages.order-detail');
+        $order =  Order::find($id);
+        return view('pages.order-detail', compact('order'));
+    }
+
+    public function cancelOrder(Request $request, $id)
+    {
+        $order = Order::where('id', $id)->first();
+        $order->status = EnumOrderStatus::getValue('CANCELLED');
+        $order->save();
+        
+        return view('pages.order-detail', compact('order'));
+    }
+
+    public function comment(Request $request)
+    {
+        $product = Product::find($request->productId);
+
+        $comment = new Comment();
+        $comment->date = date("Y-m-d"); 
+        $comment->content = $request->content;
+        $comment->product_id = $request->productId;
+        $comment->account_id=Auth::user()->id;
+
+        $product->comments()->save($comment);
+
+        return view('pages.product', compact('product'));
     }
 }

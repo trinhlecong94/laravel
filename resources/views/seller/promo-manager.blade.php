@@ -23,7 +23,6 @@
                 <button class="btn btn-primary" onclick="location.href = '/seller/add-promo'">Add promotion</button>
             </div>
             <div class="col-xs-6 col-sm-6">
-
                 <!-- TODO -->
                 <form action="" class="form-inline" style="float: right">
                     <div class="form-group">

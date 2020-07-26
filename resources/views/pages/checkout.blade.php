@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" type="text/css" href="{{ url('/styles/checkout.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url('/styles/checkout_responsive.css') }}">
 <div class="super_container_inner">
     <div class="super_overlay"></div>
 

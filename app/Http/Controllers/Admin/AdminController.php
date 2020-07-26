@@ -18,13 +18,10 @@ class AdminController extends Controller
     public function __construct(AccountService $accountService)
     {
         $this->accountService = $accountService;
-        $this->middleware('auth');
     }
 
     public function viewAccount(Request $request, $id)
     {
-        echo $request->user()->authorizeRoles([EnumRole::ROLE_ADMIN]);
-        
         $account = Account::find($id);
         return view('admin.view-account', compact('account'));
     }

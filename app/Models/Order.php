@@ -18,6 +18,11 @@ class Order extends Model
         return $this->belongsTo(Account::class, 'account_id');
     }
 
+    public function shipping()
+    {
+        return $this->belongsTo(Shipping::class, 'shipping_id');
+    }
+
     public function statusToString()
     {
         return EnumOrderStatus::getKey($this->status);

@@ -46,7 +46,7 @@
                     <div class="form-group row">
                         <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
                         <div class="col-md-6">
-                            <input id="phone" type="tel" pattern="^0[0-9]{9}$" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{$account->phone}}" required autocomplete="phone">
+                            <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{$account->phone}}" required autocomplete="phone">
                             @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

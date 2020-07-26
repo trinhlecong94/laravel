@@ -150,7 +150,8 @@
             <h2 class="comment-header">0 Comments</h2>
             @endif
             @auth
-            <form action="${pageContext.request.getContextPath()}/comment" method="post" class="form-horizontal">
+            <form action="{{ url('comment') }}" method="post" class="form-horizontal">
+                @csrf
                 <div class="form-group">
                     <label for="comment">Comment:</label>
                     <textarea class="form-control" rows="5" id="content" name="content"></textarea>
@@ -160,7 +161,7 @@
                         <button type="submit" class="btn btn-primary">Add Comment</button>
                     </div>
                 </div>
-                <input type="hidden" name="productId" value="${product.id}" />
+                <input type="hidden" name="productId" value="{{ $product->id }}" />
             </form>
             @endauth
         </div>

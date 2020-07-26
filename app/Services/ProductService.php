@@ -11,11 +11,6 @@ class ProductService
 
     private $productRepository;
 
-    /**
-     * UserController constructor.
-     * 
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;

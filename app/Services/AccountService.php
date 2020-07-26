@@ -10,11 +10,6 @@ class AccountService
 
     private $accountRepository;
 
-    /**
-     * UserController constructor.
-     * 
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(AccountRepositoryInterface $accountRepository)
     {
         $this->accountRepository = $accountRepository;

@@ -82,6 +82,5 @@
             </div>
         </div>
     </div>
-    <!-- profile -->
 </div>
 @endsection
