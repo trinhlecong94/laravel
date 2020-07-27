@@ -28,25 +28,23 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $input  = $request->input();
-        $sizes = $input['size'];
+        $sizes =  $request->size;
 
         $imageLink = $request->input('imageLink');
         $imagesArray = explode("\n", $imageLink);
 
         $product = new Product();
-        $product->name = $request->input('name');
-        $product->price = $request->input('price');
-        $product->brand =  $request->input('brand');
-        $product->code = $request->input('code');
-        $product->description = $request->input('description');
-        $product->category_id = $request->input('categoryId');
-        $product->color_id = $request->input('colorId');
+
+        $data = $request->only(['name', 'price','brand','code','description','category_id','color_id']);
+
         $product->status = EnumStatus::ACTIVE;
-
         $product->date = date("Y-m-d");
-        $product->save();
 
+
+
+
+        $product->fill($data)->save();
+    
         foreach ($sizes as $key => $sizeId) {
             $size = Size::find($sizeId);
             $product->sizes()->save($size);
@@ -61,7 +59,9 @@ class ProductController extends Controller
             $images->save();
         }
 
-        return view('pages.add-product');
+        return redirect()->action(
+            'Seller\ProductController@show', ['id' => $product->id]
+        );
     }
 
     public function show(Request $request, $id)

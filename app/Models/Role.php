@@ -8,10 +8,11 @@ use App\Enums\Role as EnumRole;
 
 class Role extends Model
 {
+    protected $fillable = ['name',];
 
     public function roleString()
     {
-        $this->roleString=EnumRole::getKey($this->name);
+        $this->roleString = EnumRole::getKey($this->name);
         return $this->roleString;
     }
 

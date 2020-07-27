@@ -23,7 +23,29 @@ class PromotionController extends Controller
         return view('seller.edit-promo', compact('promotion', 'products', 'status'));
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
+    {
+        $promotion = new Promotion();
+        $promotion->name = $request->name;
+        $promotion->discount = $request->discount;
+        $promotion->description = $request->description;
+        $promotion->start_date = $request->start_date;
+        $promotion->end_date = $request->end_date;
+        $promotion->status = EnumStatus::ACTIVE;
+
+        $products = $request->products;
+        $promotion->products()->detach();
+
+        $promotion->save();
+        foreach ($products as $key => $product) {
+            $promotion->products()->save(Product::find($product));
+        }
+
+        $products = Product::all();
+        $status = EnumStatus::getkeys();
+        return view('seller.edit-promo', compact('promotion', 'products', 'status'));
+    }
+    public function edit(Request $request, $id)
     {
         $promotion = Promotion::find($id);
         $promotion->name = $request->name;

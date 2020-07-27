@@ -58,6 +58,8 @@ Route::group(['middleware' => ['security:ROLE_SELLER']], function () {
     
     Route::get('/seller/add-promo', 'Seller\PromotionController@add');
     Route::post('/seller/add-promo', 'Seller\PromotionController@store');
+    
+    Route::post('/seller/edit-promo/{id}', 'Seller\PromotionController@edit');
     Route::get('/seller/edit-promo/{id}', 'Seller\PromotionController@show');
     Route::get('/seller/promo-manager', 'Seller\PromotionController@index');
     

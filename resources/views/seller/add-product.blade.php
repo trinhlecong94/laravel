@@ -40,7 +40,7 @@
                             <tr>
                                 <th>Category</th>
                                 <td>
-                                    <select class="form-control" name="categoryId">
+                                    <select class="form-control" name="category_id">
                                         @foreach($categories as $key => $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
@@ -58,7 +58,7 @@
                             <tr>
                                 <th>Color</th>
                                 <td>
-                                    <select class="form-control" name="colorId">
+                                    <select class="form-control" name="color_id">
                                         @foreach($colors as $key => $color)
                                         <option value="{{ $color->id }}">{{ $color->name }}</option>
                                         @endforeach

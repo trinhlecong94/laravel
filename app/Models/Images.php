@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Images extends Model
 {
-    //
+    protected $fillable = ['name', 'delete_flag', 'url', 'product_id',];
 }

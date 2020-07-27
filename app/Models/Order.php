@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $fillable = ['date', 'status', 'prices', 'account_id', 'shipping_id',];
+
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);
@@ -28,17 +30,17 @@ class Order extends Model
         return EnumOrderStatus::getKey($this->status);
     }
 
-        public function getOrderTotal()
-        {
-        
-            $OrderTotal = 0;
+    public function getOrderTotal()
+    {
 
-            foreach ($this->orderDetails as $key => $orderDetail) {
-                    
-            
-                $OrderTotal += $orderDetail->getTotal();
-            }
+        $OrderTotal = 0;
 
-            return $OrderTotal;
+        foreach ($this->orderDetails as $key => $orderDetail) {
+
+
+            $OrderTotal += $orderDetail->getTotal();
         }
+
+        return $OrderTotal;
+    }
 }

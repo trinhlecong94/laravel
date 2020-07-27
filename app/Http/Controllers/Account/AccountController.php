@@ -30,26 +30,15 @@ class AccountController extends Controller
 
     public function updateAccount(Request $request)
     {
-        $id = Auth::user()->id;
-        $account = Account::find($id);
-
-        $account->email = $request->email;
-        $account->phone = $request->phone;
-        $account->full_name = $request->full_name;
-        $account->birthday = $request->birthday;
-        $account->address = $request->address;
-
-        $account->save();
-
+        $account = Account::find(Auth::user()->id);
+        $data = $request->only(['email', 'phone', 'full_name', 'birthday', 'address']);
+        $account->fill($data)->save();
         return redirect()->action('Account\AccountController@profile');
     }
 
     public function myOrder()
     {
-        $id = Auth::user()->id;
-
-        $orders = Order::where('account_id', $id)->get();
-
+        $orders = Order::where('account_id', Auth::user()->id)->get();
         return view("account.my-order", compact('orders'));
     }
 
@@ -60,19 +49,16 @@ class AccountController extends Controller
 
     public function updatePassword(Request $request)
     {
-        $id = Auth::user()->id;
-        $account = Account::find($id);
+        $account = Account::find(Auth::user()->id);
 
         $request->validate([
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $oldPassword = $request->input('oldPassword');
-        $password = $request->input('password');
+        $oldPassword = $request->oldPassword;
+        $password = $request->password;
 
-        $user = Account::find($id);
-        $hasher = app('hash');
-        if ($hasher->check($oldPassword, $user->password)) {
+        if (app('hash')->check($oldPassword, $account->password)) {
             $account->password = Hash::make($password);
             $account->save();
         }

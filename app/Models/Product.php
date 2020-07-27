@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $fillable = [
+        'name', 'brand', 'code', 'description', 'price', 'date', 'category_id', 'color_id',
+    ];
+
     public function images()
     {
         return $this->hasMany(Images::class);
@@ -24,12 +28,12 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class,"category_id");
+        return $this->belongsTo(Category::class, "category_id");
     }
 
     public function color()
     {
-        return $this->belongsTo(Color::class,"color_id");
+        return $this->belongsTo(Color::class, "color_id");
     }
 
     public function sizes()
@@ -39,12 +43,11 @@ class Product extends Model
 
     public function promotions()
     {
-        return $this->belongsToMany(Promotion::class,'product_promotion');
+        return $this->belongsToMany(Promotion::class, 'product_promotion');
     }
 
     public function statusToString()
     {
         return EnumStatus::getKey($this->status);
     }
-
 }
