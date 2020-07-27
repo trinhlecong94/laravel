@@ -60,11 +60,11 @@
                         <td class="align-middle">{{ $promo->start_date }}</td>
                         <td class="align-middle">{{ $promo->end_date }}</td>
                         @if($promo->statusToString()=="ACTIVE")
-                        <td class="align-middle" style="color: blue">{{$promo->statusToString()}}</td>
+                        <td class="align-middle" style="color: blue">{{ $promo->statusToString() }}</td>
                         @else
-                        <td class="align-middle" style="color: red">{{$promo->statusToString()}}</td>
+                        <td class="align-middle" style="color: red">{{ $promo->statusToString() }}</td>
                         @endif
-                        <td class="align-middle"><a href="/seller/edit-promo/{{$promo->id}}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                        <td class="align-middle"><a href="/seller/edit-promo/{{ $promo->id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                     </tr>
                     @endforeach
                 </table>

@@ -49,21 +49,21 @@
                     </tr>
                     @foreach($accounts as $key => $account)
                     <tr>
-                        <td>{{$account->id}}</td>
-                        <td>{{$account->username}}</td>
-                        <td>{{$account->full_name}}</td>
-                        <td>{{$account->email}}</td>
-                        <td>{{$account->full_name}}</td>
+                        <td>{{ $account->id }}</td>
+                        <td>{{ $account->username }}</td>
+                        <td>{{ $account->full_name }}</td>
+                        <td>{{ $account->email }}</td>
+                        <td>{{ $account->full_name }}</td>
                         <td>
                             @foreach($account->roles as $key => $role)
-                            {{$role->roleString()}}
+                            {{ $role->roleString() }}
                             <br>
                             @endforeach
                         </td>
                         @if($account->status=='ACTIVE')
-                        <td style="color: blue">{{$account->statusToString()}}</td>
+                        <td style="color: blue">{{ $account->statusToString() }}</td>
                         @else
-                        <td style="color: red">{{$account->statusToString()}}</td>
+                        <td style="color: red">{{ $account->statusToString() }}</td>
                         @endif
                         <td>
                             <a href="/admin/view-account/{{ $account->id}}">

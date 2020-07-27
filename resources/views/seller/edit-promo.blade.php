@@ -76,7 +76,7 @@
                                 <td>
                                     @foreach($status as $key => $s)
                                     <label class="radio-inline" style="margin-right: 7px">
-                                        <input type="radio" name="status" value="{{$s}}"
+                                        <input type="radio" name="status" value="{{ $s }}"
                                         @if($promotion->statusToString()==$s)
                                         checked
                                         @endif >

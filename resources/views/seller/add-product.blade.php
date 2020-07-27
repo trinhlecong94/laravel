@@ -42,7 +42,7 @@
                                 <td>
                                     <select class="form-control" name="categoryId">
                                         @foreach($categories as $key => $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -60,7 +60,7 @@
                                 <td>
                                     <select class="form-control" name="colorId">
                                         @foreach($colors as $key => $color)
-                                        <option value="{{$color->id}}">{{$color->name}}</option>
+                                        <option value="{{ $color->id }}">{{ $color->name }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -69,7 +69,7 @@
                                 <th>Size</th>
                                 <td>
                                     @foreach($sizes as $key => $size)
-                                    <label class="checkbox-inline"><input type="checkbox" name="size[{{$size->id}}]" value="{{$size->id}}">{{$size->name}}</label>
+                                    <label class="checkbox-inline"><input type="checkbox" name="size[{{ $size->id }}]" value="{{ $size->id }}">{{ $size->name }}</label>
                                     @endforeach
                                 </td>
                             </tr>

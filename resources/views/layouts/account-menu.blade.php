@@ -1,19 +1,19 @@
 @auth
 <li class="nav-item d-inline-flex  align-items-center mr-2">
-    <a class="nav-link d-inline-flex" href="{{url('/account/profile')}}">
+    <a class="nav-link d-inline-flex" href="{{ url('/account/profile') }}">
         <i class="fa fa-user-o mr-2" aria-hidden="true"></i>
         {{ __('Account') }}
     </a>
 </li>
 <li class="nav-item d-inline-flex  align-items-center mr-2">
-    <a class="nav-link d-inline-flex" href="{{url('/account/change-password')}}">
+    <a class="nav-link d-inline-flex" href="{{ url('/account/change-password') }}">
         <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
         {{ __('Change Password') }}
     </a>
 </li>
 @if(Auth::user()->hasRole('ROLE_USER'))
 <li class="nav-item d-inline-flex  align-items-center mr-2">
-    <a class="nav-link d-inline-flex" href="{{url('/account/my-order')}}">
+    <a class="nav-link d-inline-flex" href="{{ url('/account/my-order') }}">
         <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
         {{ __('My Order') }}
     </a>
@@ -21,19 +21,19 @@
 @endif
 @if(Auth::user()->hasRole('ROLE_SELLER'))
 <li class="nav-item d-inline-flex  align-items-center mr-2">
-    <a class="nav-link d-inline-flex" href="{{url('/seller/order-manager')}}">
+    <a class="nav-link d-inline-flex" href="{{ url('/seller/order-manager') }}">
         <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
         {{ __('Order') }}
     </a>
 </li>
 <li class="nav-item d-inline-flex  align-items-center mr-2">
-    <a class="nav-link d-inline-flex" href="{{url('/seller/product-manager')}}">
+    <a class="nav-link d-inline-flex" href="{{ url('/seller/product-manager') }}">
         <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
         {{ __('Product') }}
     </a>
 </li>
 <li class="nav-item d-inline-flex  align-items-center mr-2">
-    <a class="nav-link d-inline-flex" href="{{url('/seller/promo-manager')}}">
+    <a class="nav-link d-inline-flex" href="{{ url('/seller/promo-manager') }}">
         <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
         {{ __('Promotion') }}
     </a>
@@ -41,7 +41,7 @@
 @endif
 @if(Auth::user()->hasRole('ROLE_ADMIN'))
 <li class="nav-item d-inline-flex  align-items-center mr-2">
-    <a class="nav-link d-inline-flex" href="{{url('/admin/account-manager')}}">
+    <a class="nav-link d-inline-flex" href="{{ url('/admin/account-manager') }}">
         <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
         {{ __('Account manager') }}
     </a>

@@ -13,8 +13,7 @@ class OrderController extends Controller
     {
     }
 
-
-    public function deleteProductInCart(Request $request, $id, $sizeId)
+    public function deleteProductInCart(Request $request, $id, $size_id)
     {
         if ($request->session()->has('order')) {
             $order = $request->session()->get('order');
@@ -22,7 +21,7 @@ class OrderController extends Controller
 
 
         foreach ($order->orderDetails as $key => $orderDetail) {
-            if (($orderDetail->product_id == $id) && ($orderDetail->size_id) == $sizeId) {
+            if (($orderDetail->product_id == $id) && ($orderDetail->size_id) == $size_id) {
                 $order->orderDetails->forget($key);
                 echo 123;
             }
@@ -33,7 +32,7 @@ class OrderController extends Controller
         return redirect(url('/cart'));
     }
 
-    public function index(Request $request, $id, $sizeId)
+    public function index(Request $request, $id, $size_id)
     {
         if ($request->session()->has('order')) {
             $order = $request->session()->get('order');
@@ -43,7 +42,7 @@ class OrderController extends Controller
 
         $temp = true;
         foreach ($order->orderDetails as $key => $orderDetail) {
-            if (($orderDetail->product_id == $id) && ($orderDetail->size_id) == $sizeId) {
+            if (($orderDetail->product_id == $id) && ($orderDetail->size_id) == $size_id) {
                 $temp = false;
             }
         }
@@ -51,7 +50,7 @@ class OrderController extends Controller
         if ($temp) {
             $orderDetail = new OrderDetail();
             $orderDetail->product_id = $id;
-            $orderDetail->size_id = $sizeId;
+            $orderDetail->size_id = $size_id;
             $orderDetail->quantity = 1;
             $order->orderDetails->add($orderDetail);
         }
@@ -61,15 +60,14 @@ class OrderController extends Controller
         return redirect(url('/cart'));
     }
 
-    public function updateProductInCart(Request $request, $id, $sizeId, $quantity)
+    public function updateProductInCart(Request $request, $id, $size_id, $quantity)
     {
         if ($request->session()->has('order')) {
             $order = $request->session()->get('order');
         }
 
-        $temp = true;
         foreach ($order->orderDetails as $key => $orderDetail) {
-            if (($orderDetail->product_id == $id) && ($orderDetail->size_id) == $sizeId) {
+            if (($orderDetail->product_id == $id) && ($orderDetail->size_id) == $size_id) {
                 $orderDetail->quantity = $quantity;
             }
         }

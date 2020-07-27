@@ -53,7 +53,7 @@
                     </tr>
                     @foreach($products as $key => $product)
                     <tr>
-                        <td>{{$product->id}}</td>
+                        <td>{{ $product->id }}</td>
                         <td><a href="/product/{{ $product->id }}"><img src="{{ $product->images[0]->url }}" class="img-thumbnail-list" />{{ $product->name }}</a></td>
                         <td>{{ $product->code }}</td>
                         <td>{{ $product->price }}</td>

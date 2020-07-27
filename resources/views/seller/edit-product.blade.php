@@ -27,23 +27,23 @@
                             <input type="hidden" name="id" id="productid" value="${product.id}" />
                             <tr>
                                 <th>Name <span style="color: red">(*)</span></th>
-                                <td><input type="text" name="name" value="{{$product->name}}" class="form-control" /></td>
+                                <td><input type="text" name="name" value="{{ $product->name }}" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <th>Brand</th>
-                                <td><input type="text" name="brand" value="{{$product->brand}}" class="form-control" /></td>
+                                <td><input type="text" name="brand" value="{{ $product->brand }}" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <th>Code <span style="color: red">(*)</span></th>
-                                <td><input type="text" name="code" value="{{$product->code}}" class="form-control" /></td>
+                                <td><input type="text" name="code" value="{{ $product->code }}" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <th>Category</th>
                                 <td>
                                     <select class="form-control" name="categoryId">
                                         @foreach($categories as $key => $category)
-                                        <option value="{{$category->id}}" @if($product->category->id == $category->id) selected @endif >
-                                            {{$category->name}}
+                                        <option value="{{ $category->id }}" @if($product->category->id == $category->id) selected @endif >
+                                            {{ $category->name }}
                                         </option>
                                         @endforeach
                                     </select>
@@ -51,18 +51,18 @@
                             </tr>
                             <tr>
                                 <th>Description</th>
-                                <td><textarea name="description" rows="3" class="form-control">{{$product->description}}</textarea></td>
+                                <td><textarea name="description" rows="3" class="form-control">{{ $product->description }}</textarea></td>
                             </tr>
                             <tr>
                                 <th>Price <span style="color: red">(*)</span></th>
-                                <td><input type="number" name="price" value="{{$product->price}}" class="form-control" /></td>
+                                <td><input type="number" name="price" value="{{ $product->price }}" class="form-control" /></td>
                             </tr>
                             <tr>
                                 <th>Color</th>
                                 <td>
                                     <select class="form-control" name="colorId">
                                         @foreach($colors as $key => $color)
-                                        <option value="{{$color->id}}" @if($product->color->id == $color->id) selected @endif >
+                                        <option value="{{ $color->id }}" @if($product->color->id == $color->id) selected @endif >
                                             {{ $color->name }}
                                         </option>
                                         @endforeach
@@ -80,9 +80,9 @@
                                     @endif
                                     @endforeach
                                     @if( $check==true )
-                                    <label class="checkbox-inline"><input type="checkbox" name="size[{{ $loop->index }}]" value="{{ $size->id }}" checked>{{$size->name}}</label>
+                                    <label class="checkbox-inline"><input type="checkbox" name="size[{{ $loop->index }}]" value="{{ $size->id }}" checked>{{ $size->name }}</label>
                                     @else
-                                    <label class="checkbox-inline"><input type="checkbox" name="size[{{ $loop->index }}]" value="{{ $size->id }}">{{$size->name}}</label>
+                                    <label class="checkbox-inline"><input type="checkbox" name="size[{{ $loop->index }}]" value="{{ $size->id }}">{{ $size->name }}</label>
                                     @endif
                                     @endforeach
                                 </td>
@@ -92,7 +92,7 @@
                                 <td>
                                     <div id="img_list">
                                         @foreach($product->images as $key => $img)
-                                        <div class="productpic" id="productpic_{{$img->id}}">
+                                        <div class="productpic" id="productpic_{{ $img->id }}">
                                             <img src="{{ $img->url }}" class="img-thumbnail" width="150" height="200" />
                                             <button type="button" class="btn" imgid="{{ $img->id }}" onclick="location.href='/seller/images/delete/{{ $img->id }}'">
                                                 <i class="fa fa-trash"></i>
@@ -109,10 +109,10 @@
                                 <td>
                                     @foreach($status as $key => $value)
                                     <label class="radio-inline" style="margin-right: 7px">
-                                        <input type="radio" name="status" value="{{$value}}" @if($product->statusToString() == $value)
+                                        <input type="radio" name="status" value="{{ $value }}" @if($product->statusToString() == $value)
                                         checked
                                         @endif >
-                                        {{$value}}
+                                        {{ $value }}
                                     </label>
                                     @endforeach
                                 </td>

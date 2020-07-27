@@ -2,16 +2,9 @@
 
 namespace App\Http\Controllers\Seller;
 
-use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\Promotion;
-use App\Models\Category;
-use App\Models\Color;
-use App\Models\Size;
-use App\Enums\Status as EnumStatus;
 use App\Enums\OrderStatus as EnumOrderStatus;
-use App\Models\Images;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller

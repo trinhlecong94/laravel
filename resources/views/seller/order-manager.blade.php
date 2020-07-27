@@ -55,17 +55,17 @@
                         @foreach($order->orderDetails as $key => $orderDetail)
                         <tr>
                             @if($loop->index==0)
-                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->id}}</td>
-                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->date}}</td>
-                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->account->username}}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->id }}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->date }}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->account->username }}</td>
                             @endif
-                            <td class="align-middle"><a href="/product/{{$orderDetail->product->id}}">{{$orderDetail->product->name}}</a></td>
-                            <td class="align-middle">{{$orderDetail->size->name}}</td>
-                            <td class="align-middle">{{$orderDetail->quantity}}</td>
-                            <td class="align-middle">{{$orderDetail->product->price}}</td>
+                            <td class="align-middle"><a href="/product/{{ $orderDetail->product->id }}">{{ $orderDetail->product->name }}</a></td>
+                            <td class="align-middle">{{ $orderDetail->size->name }}</td>
+                            <td class="align-middle">{{ $orderDetail->quantity }}</td>
+                            <td class="align-middle">{{ $orderDetail->product->price }}</td>
                             @if($loop->index == 0)
-                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->prices}}</td>
-                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->statusToString()}}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->prices }}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->statusToString() }}</td>
                             <td class="align-middle" rowspan="{{count($order->orderDetails)}}">
                                 <form action="" method="post">
                                     @csrf
@@ -73,7 +73,7 @@
                                     <select class="form-control" name='status' onchange='if(this.value != 0) { this.form.submit(); }'>
                                         <option value='0'>Change status</option>
                                         @foreach($status as $key => $s)
-                                        <option value='{{$s}}'>{{$s}}</option>
+                                        <option value='{{ $s }}'>{{ $s }}</option>
                                         @endforeach
                                     </select>
                                 </form>

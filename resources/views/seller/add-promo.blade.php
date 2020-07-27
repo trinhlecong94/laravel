@@ -50,7 +50,7 @@
                                 <td>
                                     @foreach($products as $key => $product)
                                     <div class="checkbox">
-                                        <label><input type="checkbox" name="products[{{$loop->index}}]" value="{{ $product->id }}">ID: {{ $product->id }} {{ $product->name }}</label>
+                                        <label><input type="checkbox" name="products[{{ $loop->index }}]" value="{{ $product->id }}">ID: {{ $product->id }} {{ $product->name }}</label>
                                     </div>
                                     @endforeach
                                 </td>

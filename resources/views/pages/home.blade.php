@@ -37,7 +37,7 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="product">
                         <div class="product_image">
-                            <a href="/product/{{$value->id}}">
+                            <a href="/product/{{ $value->id }}">
                                 <img src="{{ $value->images[0]->url }}" alt="">
                             </a>
                         </div>
@@ -46,10 +46,10 @@
                                 <div>
                                     <div>
                                         <div class="product_name">
-                                            <a href="/product/{{$value->id}}"> {{ $value->name}}</a>
+                                            <a href="/product/{{ $value->id }}"> {{ $value->name}}</a>
                                         </div>
                                         <div class="product_category">In
-                                            <a href="/category/{{$value->category->id}}">
+                                            <a href="/category/{{ $value->category->id }}">
                                                 {{ $value->category->name }}
                                             </a>
                                         </div>

@@ -23,12 +23,12 @@
                             @foreach($product->images as $key => $image)
                             @if($loop->index ==0)
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="{{$image->url}}">
+                                <img class="d-block w-100" src="{{ $image->url }}">
                             </div>
                             @endif
                             @if($loop->index >0)
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="{{$image->url}}">
+                                <img class="d-block w-100" src="{{ $image->url }}">
                             </div>
                             @endif
                             @endforeach
@@ -47,11 +47,11 @@
                 <div class="col-lg-6 product_col">
                     <div class="product_info">
                         <div class="product_name">
-                            {{$product->name}}
+                            {{ $product->name }}
                         </div>
                         <div class="product_category">In
-                            <a href="/category/{{$product->category->id}}">
-                                {{$product->category->name}}
+                            <a href="/category/{{ $product->category->id }}">
+                                {{ $product->category->name }}
                             </a>
                         </div>
                         <div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
@@ -70,8 +70,8 @@
                             <ul class="d-flex flex-row align-items-start justify-content-start">
                                 @foreach($product->sizes as $key => $size)
                                 <li>
-                                    <input type="radio" id="radio_{{$loop->index+1}}" name="product_size_radio" value="{{$size->id}}" class="regular_radio" @if($loop->index==0) checked @endif>
-                                    <label for="radio_{{$loop->index+1}}">{{$size->name}}</label>
+                                    <input type="radio" id="radio_{{ $loop->index+1 }}" name="product_size_radio" value="{{ $size->id }}" class="regular_radio" @if($loop->index==0) checked @endif>
+                                    <label for="radio_{{ $loop->index+1 }}">{{ $size->name }}</label>
                                 </li>
                                 @endforeach
                             </ul>
@@ -80,15 +80,15 @@
                             @if($product->promotions->count()>0)
                             <p style="font-weight: bold;color: red">Promotions: </p>
                             @foreach($product->promotions as $key => $promotion)
-                            <p>{{$promotion->name}} - {{$promotion->description}} </p>
+                            <p>{{ $promotion->name }} - {{ $promotion->description }} </p>
                             @endforeach
                             @endif
                         </div>
                         <div class="product_text">
-                            <p>Product Color: {{$product->color->name}}</p>
-                            <p>Product Code: {{$product->code}}</p>
-                            <p>Brand: {{$product->brand}}</p>
-                            <p>Description: {{$product->description}}</p>
+                            <p>Product Color: {{ $product->color->name }}</p>
+                            <p>Product Code: {{ $product->code }}</p>
+                            <p>Brand: {{ $product->brand }}</p>
+                            <p>Description: {{ $product->description }}</p>
                         </div>
                         <div class="product_buttons">
                             <div class="text-right d-flex flex-row align-items-start justify-content-start">

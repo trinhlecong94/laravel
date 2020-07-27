@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row" style="margin-top: 100px">
             <div class="col-lg-6 offset-lg-3">
-                <div class="section_title text-center">My Order</div>
+                <div class="section_title text-center">{{ __('My Order') }}</div>
             </div>
         </div>
         <div class="row page_nav_row">
@@ -44,20 +44,20 @@
                         @foreach($order->orderDetails as $key => $orderDetail)
                         <tr>
                             @if($loop->index==0)
-                            <td class="align-middle" rowspan="{{ count($order->orderDetails) }}">{{$order->id}}</td>
-                            <td class="align-middle" rowspan="{{ count($order->orderDetails) }}">{{$order->date}}</td>
+                            <td class="align-middle" rowspan="{{ count($order->orderDetails) }}">{{ $order->id }}</td>
+                            <td class="align-middle" rowspan="{{ count($order->orderDetails) }}">{{ $order->date }}</td>
                             @endif
-                            <td class="align-middle"><a href="/product/{{$orderDetail->product->id}}"><img src="{{$orderDetail->product->images[0]->url}}" class="img-thumbnail-list" />{{$orderDetail->product->name}}</a>
+                            <td class="align-middle"><a href="/product/{{ $orderDetail->product->id }}"><img src="{{ $orderDetail->product->images[0]->url }}" class="img-thumbnail-list" />{{ $orderDetail->product->name }}</a>
                             </td>
-                            <td class="align-middle">{{$orderDetail->size->name}}</td>
-                            <td class="align-middle">{{$orderDetail->quantity}}</td>
-                            <td class="align-middle">{{$orderDetail->product->price}}</td>
+                            <td class="align-middle">{{ $orderDetail->size->name }}</td>
+                            <td class="align-middle">{{ $orderDetail->quantity }}</td>
+                            <td class="align-middle">{{ $orderDetail->product->price }}</td>
                             @if($loop->index==0)
-                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->prices}}</td>
-                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{$order->statusToString()}}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->prices }}</td>
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->statusToString() }}</td>
                             <td class="align-middle" rowspan="{{count($order->orderDetails)}}">
                                 @if($order->status=='PENDING')
-                                <button onclick="cancelOrder({{$order->id}})" class="btn"><i class="fa fa-trash"></i></button>
+                                <button onclick="cancelOrder( {{ $order->id }} )" class="btn"><i class="fa fa-trash"></i></button>
                                 @endif
                             </td>
                             @endif

@@ -21,7 +21,6 @@
                 <div class="col-xs-12 col-sm-12">
                     <div class="card-body">
                         <form method="POST" action="{{ url('account/update-password') }}">
-                            
                             @csrf
                             <div class="form-group row">
                                 <label for="oldPassword"
@@ -61,7 +60,6 @@
                                            name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
-
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-6">
                                     <button type="submit" class="btn btn-primary">

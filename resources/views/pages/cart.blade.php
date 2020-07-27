@@ -138,7 +138,7 @@
                             <ul class="cart_extra_total_list">
                                 <li class="d-flex flex-row align-items-center justify-content-start">
                                     <div class="cart_extra_total_title">Subtotal</div>
-                                    <div class="cart_extra_total_value ml-auto">{{$order->getOrderTotal()}}</div>
+                                    <div class="cart_extra_total_value ml-auto">{{ $order->getOrderTotal() }}</div>
                                 </li>
                                 <li class="d-flex flex-row align-items-center justify-content-start">
                                     <div class="cart_extra_total_title">Discount</div>
@@ -150,7 +150,7 @@
                                 </li>
                                 <li class="d-flex flex-row align-items-center justify-content-start">
                                     <div class="cart_extra_total_title">Total</div>
-                                    <div class="cart_extra_total_value ml-auto">{{$order->getOrderTotal()}}</div>
+                                    <div class="cart_extra_total_value ml-auto">{{ $order->getOrderTotal() }}</div>
                                 </li>
                             </ul>
                             <div class="checkout_button trans_200">

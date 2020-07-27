@@ -14,17 +14,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
-    /**
-     * @var AcountRepositoryInterface
-     */
     private $accountRepository;
     private $roleRepository;
 
-    /**
-     * UserController constructor.
-     * 
-     * @param UserRepositoryInterface $userRepository
-     */
     public function __construct(
         AccountRepositoryInterface $accountRepository,
         RoleRepositoryInterface $roleRepository
@@ -33,12 +25,6 @@ class AccountController extends Controller
         $this->roleRepository = $roleRepository;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function profile(Request $request)
     {
         return view("account.profile");

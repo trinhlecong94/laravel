@@ -45,10 +45,10 @@
                                 <td>
                                     @foreach($roles as $key => $role)     
                                     <label class="radio-inline" style="margin-right: 7px">
-                                        <input type="radio" name="roleradio" value="{{$role->id}}" 
+                                        <input type="radio" name="roleradio" value="{{ $role->id }}" 
                                         @if($role->roleString() == 'ROLE_USER') checked
                                         @endif >
-                                        {{$role->roleString()}}
+                                        {{ $role->roleString() }}
                                     </label>
                                     @endforeach
                                 </td>
