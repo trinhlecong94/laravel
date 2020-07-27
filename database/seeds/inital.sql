@@ -138,24 +138,24 @@
     (9,1,3),(16,1,1),(17,1,5),(18,3,5),(19,1,10),(20,1,10),(21,1,2),(22,10,1);
 
     INSERT INTO `laravel`.`shippings` (`id`, `address`, `email`, `full_name`, `phone`) VALUES 
-    (1,'Hoa Tien','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555666'),
-    (2,'Hoa Tien','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555666'),
-    (3,'Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (4,'Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (5,'Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (6,'Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (7,'La Bong, Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (8,'Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (9,'4609 Lincoln Park Drive','nguyendinhtai92dn@gmail.com','USER MOT','7034934583'),
-    (10,'4609 Lincoln Park Drive','nguyendinhtai92dn@gmail.com','USER MOT','7034934583'),
-    (11,'4609 Lincoln Park Drive','nguyendinhtai92dn@gmail.com','USER MOT','7034934583'),
-    (12,'HOA THO','dinhtai92dn@gmail.com','NHU Y','9090999999'),
-    (13,'Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (14,'Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (15,'Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (16,'Hoa Tien, Hoa Vang','dinhtai92dn@gmail.com','Nguyen Dinh Tai','0704555444'),
-    (17,'Hoa Tien, Hoa Vang','dinhtai92.dn@gmail.com','TAI NGUYEN','012345611'),
-    (18,'Hoa Tien, Hoa Vang','dinhtai92.dn@gmail.com','TAI NGUYEN','012345611');
+    (1,'Hoa Tien','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555666'),
+    (2,'Hoa Tien','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555666'),
+    (3,'Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (4,'Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (5,'Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (6,'Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (7,'La Bong, Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (8,'Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (9,'4609 Lincoln Park Drive','nguyentrinh.codecomplete@gamil.com@gmail.com','USER MOT','7034934583'),
+    (10,'4609 Lincoln Park Drive','nguyentrinh.codecomplete@gamil.com@gmail.com','USER MOT','7034934583'),
+    (11,'4609 Lincoln Park Drive','nguyentrinh.codecomplete@gamil.com@gmail.com','USER MOT','7034934583'),
+    (12,'HOA THO','trinh.codecomplete@gamil.com@gmail.com','NHU Y','9090999999'),
+    (13,'Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (14,'Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (15,'Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (16,'Hoa Tien, Hoa Vang','trinh.codecomplete@gamil.com@gmail.com','Le Cong Trinh','0704555444'),
+    (17,'Hoa Tien, Hoa Vang','Congtrjnh@gail.com','TAI NGUYEN','012345611'),
+    (18,'Hoa Tien, Hoa Vang','Congtrjnh@gail.com','TRINH LE','012345611');
 
 
     INSERT INTO `laravel`.`orders` (`id`, `date`, `status`, `prices`, `account_id`, `shipping_id`)  VALUES 

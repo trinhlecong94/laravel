@@ -62,6 +62,8 @@ Route::group(['middleware' => ['security:ROLE_SELLER']], function () {
     
     Route::get('/seller/order-manager', 'Seller\OrderController@index');
     Route::post('/seller/order-manager', 'Seller\OrderController@update');
+
+    Route::get('downloadOrderExcel', 'ExportController@export')->name('downloadOrderExcel');
 });
 
 Auth::routes();
