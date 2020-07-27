@@ -13,9 +13,6 @@ class FunctionController extends Controller
 
     public function index(Request $request)
     {
-      
-        $request->user()->authorizeRoles(['employee', 'admin']);
-        
         return view('home');
     }
 }

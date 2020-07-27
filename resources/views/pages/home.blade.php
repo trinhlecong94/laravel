@@ -29,8 +29,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="row products_row">
                 @if(!empty($data) && $data->count())
                 @foreach($data as $key => $value)
@@ -58,9 +56,9 @@
                                 <div class="ml-auto text-right">
                                     <div class="rating_r">
                                         <i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i>
-                                        ??
+                                        {{ count($value->Favorites) }}
                                     </div>
-                                    <div class="product_price text-right">{{ number_format($value->price, 1) }}</div>
+                                    <div class="product_price text-right">${{ number_format($value->price, 1) }}</div>
                                 </div>
                             </div>
                         </div>

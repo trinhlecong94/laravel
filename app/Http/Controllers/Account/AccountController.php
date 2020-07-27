@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
-    private $accountRepository;
-    private $roleRepository;
 
     public function __construct(
         AccountRepositoryInterface $accountRepository,
@@ -25,7 +23,7 @@ class AccountController extends Controller
         $this->roleRepository = $roleRepository;
     }
 
-    public function profile(Request $request)
+    public function profile()
     {
         return view("account.profile");
     }

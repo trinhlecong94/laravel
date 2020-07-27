@@ -34,7 +34,7 @@
                             <div class="checkout_form_container">
                                 @auth
                                 <div>
-                                    <input type="text" id="checkout_name" name="fullName" class="checkout_input" value="${Auth::user()->full_name}}" placeholder="Full Name" pattern="[A-Za-z ]{3,50}" title="Only letters and space are allowed, length 3-50" required>
+                                    <input type="text" id="checkout_name" name="fullName" class="checkout_input" value="{{Auth::user()->full_name}}" placeholder="Full Name" pattern="[A-Za-z ]{3,50}" title="Only letters and space are allowed, length 3-50" required>
                                 </div>
                                 <div>
                                     <input type="text" id="checkout_address" name="address" class="checkout_input" value="{{Auth::user()->address}}" placeholder="Address Line" required>

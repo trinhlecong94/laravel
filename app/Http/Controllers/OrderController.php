@@ -19,16 +19,12 @@ class OrderController extends Controller
             $order = $request->session()->get('order');
         }
 
-
         foreach ($order->orderDetails as $key => $orderDetail) {
             if (($orderDetail->product_id == $id) && ($orderDetail->size_id) == $size_id) {
                 $order->orderDetails->forget($key);
-                echo 123;
             }
         }
-
         session(['order' => $order]);
-
         return redirect(url('/cart'));
     }
 
@@ -56,7 +52,6 @@ class OrderController extends Controller
         }
 
         session(['order' => $order]);
-
         return redirect(url('/cart'));
     }
 

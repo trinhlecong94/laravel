@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Shipping;
 use App\Models\Comment;
 use App\Enums\OrderStatus as EnumOrderStatus;
+use App\Models\Favorite;
 use App\Services\ProductService;
 use DateTime;
 
@@ -22,10 +23,26 @@ class HomeController extends Controller
         $this->productService = $productService;
     }
 
+    public function index(Request $request)
+    {
+        $data = $this->productService->pagination();
+        return view('pages.home', compact('data'));
+    }
+
+    public function product(Request $request, $id)
+    {
+        $favorited = array();
+        if (Auth::user() != null) {
+            $favorited = Favorite::where('product_id', $id)->where('account_id', Auth::user()->id)->get();
+        }
+        $product = $this->productService->findById($id);
+        return view('pages.product', compact('product', 'favorited'));
+    }
+
     public function productSearch(Request $request)
     {
-        $searchText = $request->input('searchText');
-        $sort = $request->input('sort');
+        $searchText = $request->searchText;
+        $sort = $request->sort;
         if ($sort == 'Latest') {
             $data = Product::where('name', 'LIKE', '%' . $searchText . '%')->with('category')->orderBy('date', 'ASC')->paginate(9);
         } elseif ($sort == 'Oldest') {
@@ -37,18 +54,6 @@ class HomeController extends Controller
         }
 
         return view('pages.home', compact('data'));
-    }
-
-    public function index(Request $request)
-    {
-        $data = $this->productService->pagination();
-        return view('pages.home', compact('data'));
-    }
-
-    public function product(Request $request, $id)
-    {
-        $product = $this->productService->findById($id);
-        return view('pages.product', compact('product'));
     }
 
     public function category(Request $request, $id)
@@ -63,7 +68,7 @@ class HomeController extends Controller
         return view('pages.cart', compact('order'));
     }
 
-    public function checkoutStatus(Request $request)
+    public function checkoutStatus()
     {
         return view('pages.checkout-status');
     }
@@ -122,7 +127,7 @@ class HomeController extends Controller
         $order = Order::where('id', $id)->first();
         $order->status = EnumOrderStatus::getValue('CANCELLED');
         $order->save();
-        
+
         return view('pages.order-detail', compact('order'));
     }
 
@@ -131,13 +136,38 @@ class HomeController extends Controller
         $product = Product::find($request->productId);
 
         $comment = new Comment();
-        $comment->date = date("Y-m-d"); 
+        $comment->date = date("Y-m-d");
         $comment->content = $request->content;
         $comment->product_id = $request->productId;
-        $comment->account_id=Auth::user()->id;
+        $comment->account_id = Auth::user()->id;
 
         $product->comments()->save($comment);
 
-        return view('pages.product', compact('product'));
+        return redirect()->action(
+            'HomeController@product',
+            ['id' => $request->productId],
+        );
+    }
+
+    public function favorite(Request $request, $id)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $favorite = Favorite::where('product_id', $id)->where('account_id', Auth::user()->id)->first();
+        if ($favorite == null) {
+            $favorite = new Favorite();
+            $favorite->product_id = $id;
+            $favorite->account_id = Auth::user()->id;
+            $favorite->save();
+        } else {
+            $favorite->delete();
+        }
+
+        return redirect()->action(
+            'HomeController@product',
+            ['id' => $id],
+        );
     }
 }

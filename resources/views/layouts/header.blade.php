@@ -26,7 +26,6 @@
                 </form>
             </div>
             <!-- User -->
-
             <div>
                 @auth
                 <h4 style="color: #002752">
@@ -53,16 +52,11 @@
             <!-- Cart -->
             <div class="cart"><a href="{{ url('/cart') }}">
                     <div><img class="svg" src="{{ url('/images/cart.svg') }}" alt="">
-
-                        <!-- 
-                            TO-DO
-                        <c:if test="${order!=null}">
-                                <div>
-                                    ${fn:length(order.orderDetails)}
-                                </div>
-                            </c:if> 
-                        -->
-
+                        @if(session('order'))
+                        <div>
+                            {{ count(session('order')->orderDetails) }}
+                        </div>
+                        @endif
                     </div>
                 </a>
             </div>
@@ -71,7 +65,7 @@
                 <div>
                     <div><img src="/images/phone.svg" alt=""></div>
                 </div>
-                <div>+84 704.555.444</div>
+                <div>+84.774.093.482</div>
             </div>
         </div>
     </div>

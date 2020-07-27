@@ -57,7 +57,7 @@
                         <div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
                             <div class="product_reviews">
                                 <i class="fa fa-heart fa-1x" style="color: #ff66a3" aria-hidden="true"></i>
-                                ?????
+                                {{ count($product->Favorites) }}
                             </div>
                         </div>
                         <div class="product_price">
@@ -95,18 +95,11 @@
                                 <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center" productId="${product.id}">
                                     <div>
                                         <div>
-
-                                            <i id="favicon" class="fa fa-heart fa-3x" style="color: #ff66a3" aria-hidden="true"></i>
-
-                                            <!-- TODO
-                                            <c:if test="${favorited == true}">
-                                                <i id="favicon" class="fa fa-heart fa-3x" style="color: #ff66a3" aria-hidden="true"></i>
-                                            </c:if>
-                                            <c:if test="${favorited == false}">
-                                                <i id="favicon" class="fa fa-heart-o fa-3x" style="color: #ff66a3" aria-hidden="true"></i>
-                                            </c:if>
-                                            -->
-
+                                            @if(count($favorited)!=0)
+                                            <i id="favicon" class="fa fa-heart fa-3x" style="color: #ff66a3" aria-hidden="true" onclick="location.href = '/product/favorite/{{ $product->id }}'"></i>
+                                            @else
+                                            <i id="favicon" class="fa fa-heart-o fa-3x" style="color: #ff66a3" aria-hidden="true" onclick="location.href = '/product/favorite/{{ $product->id }}'"></i>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
