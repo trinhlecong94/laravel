@@ -16,7 +16,7 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $searchText = $request->input('searchText');
+        $searchText = $request->searchText;
         if (isset($searchText)) {
             $orders = Order::where('id', $searchText)->with('orderDetails')->paginate(9);
         } else {

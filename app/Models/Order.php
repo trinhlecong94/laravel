@@ -32,15 +32,28 @@ class Order extends Model
 
     public function getOrderTotal()
     {
-
         $OrderTotal = 0;
-
         foreach ($this->orderDetails as $key => $orderDetail) {
-
-
             $OrderTotal += $orderDetail->getTotal();
         }
-
         return $OrderTotal;
+    }
+
+    public function discount()
+    {
+        $OrderTotal = 0;
+        foreach ($this->orderDetails as $key => $orderDetail) {
+            $OrderTotal += $orderDetail->product->price * $orderDetail->quantity;
+        }
+        return  $OrderTotal - $this->getOrderTotal();
+    }
+
+    public function getOrderTotalBeforeDiscout()
+    {
+        $OrderTotal = 0;
+        foreach ($this->orderDetails as $key => $orderDetail) {
+            $OrderTotal += $orderDetail->product->price * $orderDetail->quantity;
+        }
+        return  $OrderTotal;
     }
 }

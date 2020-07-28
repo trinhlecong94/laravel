@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('status');
             $table->double('prices');
             $table->timestamps();
-            $table->integer('account_id')->unsigned();
+            $table->integer('account_id')->nullable()->unsigned();
             $table->foreign('account_id')->references('id')->on('accounts');
             $table->integer('shipping_id')->unsigned();
             $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');

@@ -42,7 +42,8 @@
                         <tr>
                             <th>Order ID</th>
                             <th>Order Date</th>
-                            <th>User</th>
+                            <th>User Order</th>
+                            <th>Shipping</th>
                             <th>Product</th>
                             <th>Size</th>
                             <th>Quantity</th>
@@ -57,7 +58,12 @@
                             @if($loop->index==0)
                             <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->id }}</td>
                             <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->date }}</td>
-                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->account->username }}</td>
+                            @if($order->account!=null)
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->account->full_name }}</td>
+                            @else
+                            <td class="align-middle">None</td>
+                            @endif
+                            <td class="align-middle" rowspan="{{count($order->orderDetails)}}">{{ $order->shipping->full_name }}</td>
                             @endif
                             <td class="align-middle"><a href="/product/{{ $orderDetail->product->id }}">{{ $orderDetail->product->name }}</a></td>
                             <td class="align-middle">{{ $orderDetail->size->name }}</td>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Account;
 
 use App\Repositories\Account\AccountRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Repositories\Role\RoleRepositoryInterface;
 use App\Models\Account;
 use App\Models\Order;
 use App\Enums\OrderStatus as EnumStatus;
@@ -15,12 +14,9 @@ use Illuminate\Support\Facades\Hash;
 class AccountController extends Controller
 {
 
-    public function __construct(
-        AccountRepositoryInterface $accountRepository,
-        RoleRepositoryInterface $roleRepository
-    ) {
+    public function __construct(AccountRepositoryInterface $accountRepository)
+    {
         $this->accountRepository = $accountRepository;
-        $this->roleRepository = $roleRepository;
     }
 
     public function profile()
@@ -68,6 +64,7 @@ class AccountController extends Controller
     public function cancelOrder($id)
     {
         $order = Order::where('id', $id)->first();
+
         $order->status = EnumStatus::getValue('CANCELLED');
         $order->save();
 

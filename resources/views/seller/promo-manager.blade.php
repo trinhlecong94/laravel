@@ -26,7 +26,7 @@
                 <!-- TODO -->
                 <form action="" class="form-inline" style="float: right">
                     <div class="form-group">
-                        <input type="text" name="searchText" class="form-control" />
+                        <input type="text" name="search_text" class="form-control" />
                         <button type="submit" class="btn btn-primary" style="margin-left: 5px">Search</button>
                     </div>
                 </form>

@@ -32,7 +32,8 @@
                                 <li>Size</li>
                                 <li>Price</li>
                                 <li>Quantity</li>
-                                <li>Total</li>
+                                <li>Price</li>
+                                <li>Total after discount</li>
                                 <li style="width: 100px">Action</li>
                             </ul>
                         </div>
@@ -60,6 +61,7 @@
                                             <input type="number" id="quantity_{{ $loop->index }}" name="quantity" value="{{ $orderDetail->quantity }}" min="1" max="99">
                                         </div>
                                     </div>
+                                    <div class="product_price product_text"><span>Price: </span>{{ $orderDetail->product->price*$orderDetail->quantity }}</div>
                                     <div class="product_total product_text"><span>Total: </span>{{ $orderDetail->getTotal() }}</div>
                                     <div style="width: 100px">
                                         <button class="btn" onclick="window.location.href='/order/update/{{ $orderDetail->product->id }}/{{ $orderDetail->size->id }}/'+document.getElementById('quantity_{{ $loop->index }}').value"><i class="fa fa-refresh"></i></button>
@@ -104,30 +106,26 @@
                         <div class="cart_extra_content cart_extra_coupon">
                             <div class="cart_extra_title">Coupon code</div>
 
-                            <!-- <div class="coupon_form_container">
-                                <form action="${pageContext.request.getContextPath()}/apply-promotion" method="post" id="coupon_form" class="coupon_form">
+                            <div class="coupon_form_container">
+                                <form action="{{ url('/apply-promotion') }}" method="post" id="coupon_form" class="coupon_form">
+                                    @csrf
                                     <input type="text" name="promotion_name" class="coupon_input" required="required">
                                     <button type="submit" class="coupon_button">apply</button>
                                 </form>
-                            </div> -->
+                            </div>
 
 
-                            <div class="coupon_text">List of promotional codes applied:</div>
-                            <br>
-                            <br>
-                            <div class="cart_extra_title">TODO</div>
-
-                            <!-- <div style="margin-top: 15px">
+                            <div class="coupon_text">Promotional codes applied:</div>
+                            <div style="margin-top: 15px">
                                 <ul class="list-group list-group-flush">
-                                    @foreach($order->orderDetails as $key => $orderDetail)
-                                    @if($orderDetail->product->promotions != null)
+                                    @if(Session::has('promotion'))
                                     <li class="list-group-item">
-                                        {{ $orderDetail->product->promotions }}
+                                        {{ Session::get('promotion')->name}}
                                     </li>
                                     @endif
-                                    @endforeach
+
                                 </ul>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -137,12 +135,12 @@
                             <div class="cart_extra_title">Cart Total</div>
                             <ul class="cart_extra_total_list">
                                 <li class="d-flex flex-row align-items-center justify-content-start">
-                                    <div class="cart_extra_total_title">Subtotal</div>
-                                    <div class="cart_extra_total_value ml-auto">{{ $order->getOrderTotal() }}</div>
+                                    <div class="cart_extra_total_title">Total</div>
+                                    <div class="cart_extra_total_value ml-auto">{{ $order->getOrderTotalBeforeDiscout() }}</div>
                                 </li>
                                 <li class="d-flex flex-row align-items-center justify-content-start">
                                     <div class="cart_extra_total_title">Discount</div>
-                                    <div class="cart_extra_total_value ml-auto">TODO</div>
+                                    <div class="cart_extra_total_value ml-auto">{{ $order->discount() }}</div>
                                 </li>
                                 <li class="d-flex flex-row align-items-center justify-content-start">
                                     <div class="cart_extra_total_title">Shipping</div>

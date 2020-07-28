@@ -48,17 +48,15 @@ class PromotionController extends Controller
     public function edit(Request $request, $id)
     {
         $promotion = Promotion::find($id);
-        $promotion->name = $request->name;
-        $promotion->discount = $request->discount;
-        $promotion->description = $request->description;
-        $promotion->start_date = $request->start_date;
-        $promotion->end_date = $request->end_date;
+        $data = $request->only(['name', 'discount', 'description', 'start_date', 'end_date']);
+        $promotion->fill($data);
+
         $promotion->status = EnumStatus::getValue($request->status);
-
-        $products = $request->products;
-        $promotion->products()->detach();
-
         $promotion->save();
+
+        $promotion->products()->detach();
+        $products = $request->products;
+
         foreach ($products as $key => $product) {
             $promotion->products()->save(Product::find($product));
         }
@@ -70,8 +68,8 @@ class PromotionController extends Controller
 
     public function index(Request $request)
     {
-        $searchText = $request->input('searchText');
-        $promos = Promotion::where('name', 'LIKE', '%' . $searchText . '%')->with('products')->paginate(9);
+        $search_text = $request->input('search_text');
+        $promos = Promotion::where('name', 'LIKE', '%' . $search_text . '%')->with('products')->paginate(9);
         return view('seller.promo-manager', compact('promos'));
     }
 

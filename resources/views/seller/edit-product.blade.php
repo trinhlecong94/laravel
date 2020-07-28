@@ -40,7 +40,7 @@
                             <tr>
                                 <th>Category</th>
                                 <td>
-                                    <select class="form-control" name="categoryId">
+                                    <select class="form-control" name="category_id">
                                         @foreach($categories as $key => $category)
                                         <option value="{{ $category->id }}" @if($product->category->id == $category->id) selected @endif >
                                             {{ $category->name }}
@@ -60,7 +60,7 @@
                             <tr>
                                 <th>Color</th>
                                 <td>
-                                    <select class="form-control" name="colorId">
+                                    <select class="form-control" name="color_id">
                                         @foreach($colors as $key => $color)
                                         <option value="{{ $color->id }}" @if($product->color->id == $color->id) selected @endif >
                                             {{ $color->name }}
@@ -101,7 +101,7 @@
                                         @endforeach
                                     </div>
                                     Images link
-                                    <textarea name="imageLink" rows="6" class="form-control" required></textarea>
+                                    <textarea name="image_link" rows="6" class="form-control"></textarea>
                                 </td>
                             </tr>
                             <tr>

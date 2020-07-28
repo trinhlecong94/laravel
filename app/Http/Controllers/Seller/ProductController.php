@@ -28,28 +28,20 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $sizes =  $request->size;
-
-        $imageLink = $request->input('imageLink');
-        $imagesArray = explode("\n", $imageLink);
-
         $product = new Product();
-
-        $data = $request->only(['name', 'price','brand','code','description','category_id','color_id']);
-
+        $data = $request->only(['name', 'price', 'brand', 'code', 'description', 'category_id', 'color_id']);
         $product->status = EnumStatus::ACTIVE;
         $product->date = date("Y-m-d");
-
-
-
-
         $product->fill($data)->save();
-    
+
+        $sizes =  $request->size;
         foreach ($sizes as $key => $sizeId) {
             $size = Size::find($sizeId);
             $product->sizes()->save($size);
         }
 
+        $imageLink = $request->input('imageLink');
+        $imagesArray = explode("\n", $imageLink);
         foreach ($imagesArray as $key => $imagesurl) {
             $images = new Images();
             $images->delete_flag = 0;
@@ -59,15 +51,13 @@ class ProductController extends Controller
             $images->save();
         }
 
-        return redirect()->action(
-            'Seller\ProductController@show', ['id' => $product->id]
-        );
+        return redirect()->action('Seller\ProductController@show', ['id' => $product->id]);
     }
 
     public function show(Request $request, $id)
     {
-        $product = Product::find($id);
         $categories = Category::all();
+        $product = Product::find($id);
         $colors = Color::all();
         $sizes = Size::all();
         $status = EnumStatus::getKeys();
@@ -77,17 +67,12 @@ class ProductController extends Controller
     public function edit(Request $request, $id)
     {
         $product = Product::find($id);
-        $product->name = $request->name;
-        $product->code = $request->code;
-        $product->price = $request->price;
-        $product->brand =  $request->input('brand');
-        $product->category_id = $request->input('categoryId');
-        $product->color_id = $request->input('colorId');
-        $product->status = EnumStatus::getValue($request->input('status'));
-        $product->description = $request->input('description');
+        $data = $request->only(['name', 'code', 'price', 'brand', 'category_id', 'color_id']);
+        $product->status = EnumStatus::getValue($request->status);
+        $product->description = $request->description;
+        $product->fill($data)->save();
 
         $sizes = $request->size;
-        $product->save();
 
         $product->sizes()->detach();
 
@@ -96,8 +81,8 @@ class ProductController extends Controller
             $product->sizes()->save($size);
         }
 
-        $imageLink = $request->input('imageLink');
-        $imagesArray = explode("\n", $imageLink);
+        $image_link = $request->image_link;
+        $imagesArray = explode("\n", $image_link);
 
         foreach ($imagesArray as $key => $imagesurl) {
             $images = new Images();
@@ -108,23 +93,18 @@ class ProductController extends Controller
             $images->save();
         }
 
-        $categories = Category::all();
-        $colors = Color::all();
-        $sizes = Size::all();
-        $status = EnumStatus::getKeys();
-        return view('seller.edit-product', compact('categories', 'product', 'colors', 'sizes', 'status'));
+        return redirect()->action('Seller\ProductController@show', ['id' => $product->id]);
     }
 
     public function index(Request $request)
     {
-        $searchText = $request->input('searchText');
-        $products = Product::where('name', 'LIKE', '%' . $searchText . '%')->with('category')->paginate(9);
+        $search_text = $request->search_text;
+        $products = Product::where('name', 'LIKE', '%' . $search_text . '%')->with('category')->paginate(9);
         return view('seller.product-manager', compact('products'));
     }
 
     public function deleteImages(Request $request, $id)
     {
-        echo url()->previous();
         $img = Images::find($id);
         $img->delete();
         return redirect(url()->previous());

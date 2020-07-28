@@ -41,18 +41,18 @@ class AdminController extends Controller
     public function updateAccount(Request $request)
     {
         $account = Account::find($request->userId);
-        $data = $request->only(['email', 'phone','full_name','birthday','address']);
-        $account->status = EnumStatus::getValue($request->input('status'));
+        $data = $request->only(['email', 'phone', 'full_name', 'birthday', 'address']);
+        $account->status = EnumStatus::getValue($request->status);
         $account->fill($data)->save();
 
         $account->roles()->detach();
 
-        $arrRole = $request->input('role');
-        
+        $arrRole = $request->role;
+
         foreach ($arrRole as $key => $role) {
             $roleFromDatabase = Role::where('name', EnumRole::getValue($role))->first();
-             $account->roles()->save($roleFromDatabase);
-        }  
+            $account->roles()->save($roleFromDatabase);
+        }
 
         return view('admin.view-account', compact('account'));
     }
